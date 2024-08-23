@@ -1,0 +1,32 @@
+mixin services(name)
+    figcaption
+        .circle  
+            img(src=figure[name].src, alt=figure[name].alt)
+        h2 #{figure[name].header}
+        p #{figure[name].desc}
+
+mixin people(name)
+    figcaption
+        img(src=people[name].src, alt=people[name].alt)
+        h2 #{people[name].name}
+        p #{people[name].header}
+
+mixin works(name)
+    figcaption
+        img(src=works[name].src, alt=works[name].alt)
+        .hover 
+            h2 Hair Dresser
+            p Branding
+            a(href="#") View
+mixin blog(name)
+    figcaption 
+        .img 
+            img(src=blog[name].src, alt=blog[name].alt)
+        .first-header 
+            .date 
+                h2 #{blog[name].date}
+            .desc 
+                h2 #{blog[name].header}
+                p #{blog[name].author}
+        p #{blog[name].desc}
+        a(href="#") Read more

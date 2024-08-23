@@ -1,0 +1,323 @@
+@import components/mixins
+
+html
+    font-size: 1px
+
+.wrapper
+    max-width: 1140rem
+    margin: 0 auto
+    padding: 0 20rem
+
+body
+    margin: 0
+    header
+        margin-bottom: 100rem
+        background: url(../img/startup-hero-bg.jpg)
+        background-position: 0 -110rem
+        .header
+            display: flex
+            flex-direction: column
+            row-gap: 260rem
+        .wrapper
+            .topline
+                display: flex
+                justify-content: space-between
+                align-items: center
+                .logo
+                    h1
+                        color: #ffffff
+                        font-size: 24rem
+                        font-weight: 700
+                        font-family: "Montserrat"
+                .menu
+                    display: flex
+                    column-gap: 35rem
+                    li
+                        a
+                            font-size: 14rem
+                            color: #ffffff
+                            font-weight: 400
+                            font-family: "Montserrat"
+                            text-decoration: none
+            .center-content
+                display: flex
+                flex-direction: column
+                align-items: center
+                margin-bottom: 170rem
+                h2
+                    margin: 0 0 30rem 0
+                    font-size: 48rem
+                    text-transform: uppercase
+                    color: #ffffff
+                    font-weight: 400
+                    font-family: "Montserrat"
+                    text-align: center
+                p
+                    margin: 0 0 50rem 0
+                    font-size: 18rem
+                    text-transform: uppercase
+                    color: #ffffff
+                    font-weight: 400
+                    font-family: "Montserrat"
+                    text-align: center
+                a
+                    padding: 15rem 30rem
+                    color: #ffffff
+                    font-size: 16rem
+                    text-transform: uppercase
+                    font-weight: 400
+                    font-family: "Montserrat"
+                    text-align: center
+                    text-decoration: none
+                    background-color: transparent
+                    border-radius: 2rem
+                    border: 2rem solid #ffffff
+    main
+        .wrapper
+            .services
+                display: flex
+                flex-direction: column
+                align-items: center
+                margin-bottom: 100rem
+                h2:first-child
+                    color: #555555
+                    font-size: 20rem
+                    text-transform: uppercase
+                    font-weight: 700
+                    font-family: "Montserrat"
+                    text-align: center
+                p
+                    font-size: 16rem
+                    color: #555555
+                    font-weight: 400
+                    font-family: "Roboto Slab"
+                    text-align: center
+                figure
+                    display: flex
+                    column-gap: 45rem
+                    margin: 0
+                    figcaption
+                        display: flex
+                        flex-direction: column
+                        align-items: center
+                        text-decoration: none
+                        &:hover
+                            .circle
+                                background: #c0301c
+                            img
+                                filter: brightness(30)
+                        .circle
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            width: 87rem
+                            height: 87rem
+                            border-radius: 60%
+                            background-color: #ffffff
+                            border: 2rem solid #dddddd
+                        h2
+                            color: #555555
+                            font-size: 14rem
+                            font-weight: 700
+                            font-family: "Montserrat"
+                            text-align: center
+                            text-transform: uppercase
+        .aboutus
+            width: 100%
+            background-color: #f8f8f8
+            .wrapper
+                display: flex
+                flex-direction: column
+                align-items: center
+                padding: 20rem
+            h2:first-child
+                color: #555555
+                font-size: 20rem
+                text-transform: uppercase
+                font-weight: 700
+                font-family: "Montserrat"
+                text-align: center
+            p
+                font-size: 16rem
+                color: #555555
+                font-weight: 400
+                font-family: "Roboto Slab"
+            .desc
+                display: flex
+                text-align: left
+            figure#slider
+                position: relative
+                display: flex
+                column-gap: 30rem
+                margin: 0
+                text-align: center
+                figcaption
+                    img
+                            // height: 40rem
+                    h2
+                        font-size: 14rem
+                        text-transform: uppercase
+                        color: #555555
+                        font-family: "Myriad Pro"
+            #sliderButtons
+                position: absolute
+                width: 100%
+                height: 74%
+                button
+                    position: absolute
+                    top: 50%
+                    transform: translate(0, -50%)
+                    width: 35rem
+                    height: 38rem
+                    background-color: #c2c2c2
+                    border: none
+                    outline: none
+                    &:hover
+                        background-color: #c0301c
+                #left
+                    left: 0
+                    &::after
+                        content: ""
+                        position: absolute
+                        background: url(../img/fa-angle-left.svg)
+                        width: 8rem
+                        height: 14rem
+                        top: 50%
+                        left: 50%
+                        transform: translate(-50%, -50%)
+
+                #right
+                    right: 0
+                    &::after
+                        content: ""
+                        position: absolute
+                        background: url(../img/fa-angle-right.svg)
+                        width: 8rem
+                        height: 14rem
+                        top: 50%
+                        right: 50%
+                        transform: translate(50%, -50%)
+        .wrapper
+            .latestworksdiv
+                margin: 100rem 0
+                .topside
+                    display: flex
+                    flex-direction: column
+                    align-items: center
+                    margin-bottom: 63rem
+                    h2:first-child
+                        color: #555555
+                        font-size: 20rem
+                        text-transform: uppercase
+                        font-weight: 700
+                        font-family: "Montserrat"
+                        text-align: center
+                    ul.latestworks
+                        display: flex
+                        column-gap: 25rem
+                        margin-top: 25rem
+                        li
+                            a
+                                font-size: 16rem
+                                color: #555
+                                font-weight: 400
+                                font-family: "Roboto Slab"
+                                text-align: center
+                                text-decoration: none
+                                &:hover
+                                    color: #c0301c
+                .bottomside
+                    figure.works
+                        display: flex
+                        flex-wrap: wrap
+                        column-gap: 30rem
+                        row-gap: 30rem
+                        margin: 0
+                        figcaption
+                            position: relative
+                            &:hover
+                                .hover
+                                    display: flex
+                    .hover
+                        display: none
+                        flex-direction: column
+                        align-items: center
+                        justify-content: center
+                        position: absolute
+                        width: 100%
+                        height: 100%
+                        font-size: 16rem
+                        left: 50%
+                        transform: translate(-50%, -100%)
+                        background-color: rgb(192, 48, 28, 0.5)
+                    h2
+                        color: #ffffff
+                        font-size: 18rem
+                        font-weight: 400
+                        font-family: "Montserrat"
+                        text-align: center
+                    p
+                        color: #ffffff
+                        font-size: 12rem
+                        font-weight: 400
+                        font-family: "Roboto Slab"
+                        text-align: center
+                    a
+                        position: relative
+                        padding: 15rem 35rem 15rem 15rem
+                        color: #fff
+                        font-size: 14px
+                        letter-spacing: 1px
+                        text-transform: uppercase
+                        font-weight: 400
+                        font-family: "Roboto Slab"
+                        text-align: center
+                        text-decoration: none
+                        border: 3rem solid #fff
+                        &:hover
+                            color: #c0301c
+                            background-color: #fff
+                            border: tranparent
+                            &:after
+                                filter: brightness(0) saturate(100%) invert(28%) sepia(84%) saturate(12) hue-rotate(359deg) brightness(104%) contrast(124%)
+
+                        &::after
+                            content: ""
+                            position: absolute
+                            background: url(../img/fa-angle-right.svg)
+                            width: 8rem
+                            height: 14rem
+                            top: 50%
+                            right: 12%
+                            transform: translate(0, -47%)
+                            filter: brightness(50.5)
+
+.line
+    width: 50rem
+    height: 2rem
+    background-color: #555555
+    text-align: center
+
+@font-face
+    font-family: 'Montserrat'
+    src: url('../fonts/Montserrat-Bold.woff2') format('woff2'), url('../fonts/Montserrat-Bold.woff') format('woff')
+    font-weight: 700
+    font-style: normal
+
+@font-face
+    font-family: 'Montserrat'
+    src: url('../fonts/Montserrat-Regular.woff2') format('woff2'), url('../fonts/Montserrat-Regular.woff') format('woff')
+    font-weight: 400
+    font-style: normal
+
+@font-face
+    font-family: 'Roboto Slab'
+    src: url('../fonts/RobotoSlab-Regular.woff2') format('woff2'), url('../fonts/RobotoSlab-Regular.woff') format('woff')
+    font-weight: 400
+    font-style: normal
+
+@font-face
+    font-family: 'Myriad Pro'
+    src: url('../fonts/MyriadPro-Regular.woff2') format('woff2'), url('../fonts/MyriadPro-Regular.woff') format('woff')
+    font-weight: 400
+    font-style: normal
