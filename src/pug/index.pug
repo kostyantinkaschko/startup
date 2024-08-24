@@ -15,7 +15,7 @@ html(lang="uk")
       .wrapper.header
         .topline 
           .logo 
-            h1 Startup
+            a(href="#")  Startup
           ul.menu 
             li
               a(href="#") Home
@@ -32,7 +32,7 @@ html(lang="uk")
             li  
               a(href="#") Contact
         .center-content
-          h2 Welcome to STARTUP
+          h1 Welcome to STARTUP
           p Your Favourite Creative Agency Template
           a(href="#") Get Started
     main
@@ -88,15 +88,20 @@ html(lang="uk")
               +works("da") 
               +works("da") 
               +works("da") 
-          .propaboutwork 
-            h2 Do you like OUR WORK so far? Let's talk about YOUR PROJECT!
-            a(href="#") Get in Touch
+      .propaboutwork 
+        .content
+          h2 Do you like OUR WORK so far?
+          h2#last-h2 Let's talk about YOUR PROJECT!
+          a(href="#") Get in Touch
+      .wrapper 
         .recents-posts 
           h2 Recent blog posts
+          .line
           p Lorem ipsum dolor sit amet, consetetur sadipscing elitr amet
           figure 
-            +blog("first") 
-            +blog("second")
+            +blog("first", "redText") 
+            hr#marginForBlog
+            +blog("second", "defuelt")
     footer 
       .comapnies-block
         .logos 
