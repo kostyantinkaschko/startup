@@ -1,8 +1,8 @@
-mixin services(name)
-    figcaption
-        .circle  
+mixin services(name, id)
+    figcaption(id=id)
+        .circle(id=`${id}circle`)
             img(src=figure[name].src, alt=figure[name].alt)
-        h2 #{figure[name].header}
+        h2(id=`${id}H2`) #{figure[name].header}
         p #{figure[name].desc}
 
 mixin people(name)
@@ -27,7 +27,12 @@ mixin blog(name, id)
                 .date 
                     h2 #{blog[name].date}
                 .desc 
-                    h2(id=id) #{blog[name].header}
-                    p #{blog[name].author}
+                    a(href="#")  #{blog[name].header}
+                    p 
+                        em
+                            | by 
+                            a(href="#" id="descHyper")  #{blog[name].authorFirstName}
+                            |  #{blog[name].authorName}  in 
+                            a(href="#" id="descHyper")  Development  
             p #{blog[name].desc}
-            a(href="#") Read more
+            a(href="#")#readMore Read more
