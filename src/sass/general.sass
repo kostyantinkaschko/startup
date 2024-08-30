@@ -19,7 +19,6 @@ body
             flex-direction: column
             row-gap: 260rem
             .with-background
-
         .wrapper
             .toplineFixed
                 position: fixed
@@ -28,7 +27,6 @@ body
                 left: 0
                 padding: 10rem
                 top: -45rem
-
             .topline
                 display: flex
                 justify-content: space-between
@@ -41,6 +39,8 @@ body
                         font-weight: 700
                         font-family: "Montserrat"
                         text-decoration: none
+                        &:hover
+                            color: #c0301c
                 .menu
                     display: flex
                     column-gap: 35rem
@@ -51,6 +51,8 @@ body
                             font-weight: 400
                             font-family: "Montserrat"
                             text-decoration: none
+                            &:hover
+                                color: #c0301c
             .center-content
                 display: flex
                 flex-direction: column
@@ -84,6 +86,12 @@ body
                     background-color: transparent
                     border-radius: 2rem
                     border: 2rem solid #ffffff
+                    transition: all .5s ease
+                    &:hover
+                        border-radius: 20%
+                        background: #000
+                        animation: button 2s infinite
+
     main
         .wrapper
             .services
@@ -127,6 +135,7 @@ body
                             border-radius: 60%
                             background-color: #ffffff
                             border: 2rem solid #dddddd
+                            transition: all .3s ease
                         h2
                             color: #555555
                             font-size: 14rem
@@ -695,3 +704,14 @@ body
         opacity: 0
     100%
         opacity: 1
+@keyframes button
+    0%
+        border-radius: 0
+    25%
+        border-radius: 20% 20% 
+    50%
+        border-radius: 20% 40%
+    75%
+        border-radius: 40% 20%
+    100%
+        border-radius: 0 0
