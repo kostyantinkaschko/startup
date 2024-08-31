@@ -31,13 +31,13 @@ html(lang="uk")
               a(href="#") Clients
             li  
               a(href="#") Contact
-        .center-content
+        .center-content#centerContent
           h1 Welcome to STARTUP
           p Your Favourite Creative Agency Template
           a(href="#") Get Started
     main
       .wrapper 
-        .services 
+        .services#services 
           h2 Services
           .line 
           p We offer ipsum dolor sit amet, consetetur sadipscing elitr amet
@@ -45,7 +45,7 @@ html(lang="uk")
             +services('typograph', "typographId")
             +services('code', "codeId")
             +services('support', "supportId")
-      .aboutus
+      .aboutus#aboutus
         .wrapper 
           h2 About us
           .line
@@ -62,7 +62,7 @@ html(lang="uk")
               button#left 
               button#right 
       .wrapper 
-        .latestworksdiv
+        .latestworksdiv#latestworksid
           .topside 
             h2 Latest works 
             .line
@@ -88,12 +88,12 @@ html(lang="uk")
               +works("seven") 
               +works("eight") 
               +works("nine") 
-      .propaboutwork 
+      .propaboutwork#proaboutwork
         .content
           h2 Do you like OUR WORK so far?
           h2#last-h2 Let's talk about YOUR PROJECT!
           a(href="#") Get in Touch
-      .wrapper 
+      .wrapper#recentsPosts 
         .recents-posts 
           h2 Recent blog posts
           .line
@@ -103,7 +103,7 @@ html(lang="uk")
             hr#marginForBlog
             +blog("second", "defuelt")
     footer 
-      .comapnies-block
+      .comapnies-block#companiesBlock
         .wrapper 
           .info 
             .logos 
@@ -123,7 +123,7 @@ html(lang="uk")
               .circleBlock#thirdCircle(onclick="activeCite('third')")
             //- button(onclick="activeCite('back')") 
             //- button(onclick="activeCite('next')") 
-      .footer-content.wrapper
+      .footer-content.wrapper#footerContent
         .topside 
           .get-in-touch 
             h2 Get in touch
@@ -170,7 +170,7 @@ html(lang="uk")
                   span * 
                   | We’ll contact you as as possible. We don’t reply on Monday.
 
-      .footer 
+      .footer#footer 
         .wrapper 
           .social 
             a(href="#" id="tw")

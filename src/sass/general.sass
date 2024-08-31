@@ -32,6 +32,8 @@ body
                 justify-content: space-between
                 align-items: center
                 margin: 40rem 0 0 0
+                transition: all 1s ease
+                z-index: 99999
                 .logo
                     a
                         color: #ffffff
@@ -166,6 +168,8 @@ body
             .desc
                 display: flex
                 text-align: left
+                column-gap: 30rem
+                row-gap: 30rem
 
             figure#slider
                 position: relative
@@ -346,12 +350,16 @@ body
                     border-radius: 2rem
                     border: 2rem solid #ffffff
                     text-decoration: none
+                    &:hover
+                        border-radius: 20%
+                        background: #000
+                        animation: button 2s infinite
         .wrapper
             .recents-posts
                 display: flex
                 align-items: center
                 flex-direction: column
-                margin-bottom: 100rem
+                margin: 100rem 0 100rem 0
                 h2
                     color: #555555
                     font-size: 20rem
@@ -708,10 +716,21 @@ body
     0%
         border-radius: 0
     25%
-        border-radius: 20% 20% 
+        border-radius: 20% 20%
     50%
         border-radius: 20% 40%
     75%
         border-radius: 40% 20%
     100%
         border-radius: 0 0
+
+@keyframes backgroundTopLine
+    0%
+        width: 100%
+        background-Color: rgba(0,0,0,0.5)
+    1%
+        width: 93%
+    50%
+        background-Color: rgba(255,0,0,0.5)
+    100%
+        background-Color: rgba(0,0,0,0.5)
