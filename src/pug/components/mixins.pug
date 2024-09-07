@@ -6,11 +6,12 @@ mixin services(name, id)
         p #{figure[name].desc}
 
 mixin people(name)
-    figcaption
-        img(src=people[name].src, alt=people[name].alt)
-        h2 #{people[name].name}
-        p #{people[name].header}
-
+    figcaption#slider
+        each person, index in people
+            .slide(data-index=index)
+                img(src=person.src, alt=person.alt)
+                h2 #{person.name}
+                p #{person.header}
 mixin works(name)
     figcaption
         img(src=works[name].src, alt=works[name].alt)
@@ -19,20 +20,22 @@ mixin works(name)
             p Branding
             a(href="#") View
 mixin blog(name, id)
-    figcaption 
-        .img 
-            img(src=blog[name].src, alt=blog[name].alt)
-        .first-header 
-            .date-header
-                .date 
-                    h2 #{blog[name].date}
-                .desc 
-                    a(href="#")  #{blog[name].header}
-                    p 
-                        em
-                            | by 
-                            a(href="#" id="descHyper")  #{blog[name].authorFirstName}
-                            |  #{blog[name].authorName}  in 
-                            a(href="#" id="descHyper")  Development  
-            p #{blog[name].desc}
-            a(href="#")#readMore Read more
+    figcaption(id=blog[name].id)
+        .flex.column-gap40
+            .img 
+                img(src=blog[name].src, alt=blog[name].alt)
+            .first-header
+                .date-header
+                    .date 
+                        h2 #{blog[name].date}
+                    .desc 
+                        a(href="#")  #{blog[name].header}
+                        p 
+                            em
+                                | by 
+                                a(href="#" id="descHyper")  #{blog[name].authorFirstName}
+                                |  #{blog[name].authorName}  in 
+                                a(href="#" id="descHyper")  Development  
+                p(id=blog[name].id+"p") #{blog[name].desc}
+                a(href="#readMore" onclick=`readMore("${blog[name].id}")`)#readMore Read more
+

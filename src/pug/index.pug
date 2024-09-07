@@ -68,16 +68,16 @@ html(lang="uk")
             .line
             ul.latestworks 
               li
-                a(href="#") All
+                a(href="#bottomside" onclick="activeButton()")#activeButton All
               li
-                a(href="#") Branding
+                a(href="#bottomside" onclick="activeButton()") Branding
               li
-                a(href="#") Design
+                a(href="#bottomside" onclick="activeButton()") Design
               li
-                a(href="#") Development
+                a(href="#bottomside" onclick="activeButton()") Development
               li
-                a(href="#") Strategy
-          .bottomside 
+                a(href="#bottomside" onclick="activeButton()") Strategy
+          .bottomside#bottomside
             figure.works
               +works("first") 
               +works("second") 
@@ -92,7 +92,7 @@ html(lang="uk")
         .content
           h2 Do you like OUR WORK so far?
           h2#last-h2 Let's talk about YOUR PROJECT!
-          a(href="#") Get in Touch
+          a(href="#footerContent") Get in Touch
       .wrapper#recentsPosts 
         .recents-posts 
           h2 Recent blog posts
@@ -156,7 +156,7 @@ html(lang="uk")
 
 
           .form 
-            form(action="#" method="post") // method="get"
+            form(action="#" method="post")
               .firstInputs 
                 input(type="text" name="text" id="name" placeholder="Your name" required)
                 input(type="text" name="text" id="email" placeholder="Your e-mail" required)

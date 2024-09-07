@@ -29,8 +29,10 @@ let click = 0,
   emailRexExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   scrollY1px = 0,
   fixedScrollY1px = 0,
-  lastScrollY = 0
-
+  lastScrollY = 0,
+  readMoreVar = 0,
+  postp = 0,
+  activeButtonVar = 0
 document.addEventListener("DOMContentLoaded", event => {
   header.style.animation = "1.8s opacity"
   header.style.opacity = "1"
@@ -286,7 +288,7 @@ function send() {
 
   if (emailCheck) {
     let userDataConfirmed = confirm('Чи правильно ви все вказали?')
-  } else if(!emailCheck){
+  } else if (!emailCheck) {
     alert("You write uncorrect email")
   }
   localStorage.setItem("username", username)
@@ -294,4 +296,41 @@ function send() {
   localStorage.setItem("subject", subject)
   localStorage.setItem("companyName", companyName)
   localStorage.setItem("message", message)
+}
+
+function readMore(id) {
+  let buttonId = document.getElementById(id),
+    newElement = document.createElement("p"),
+    paragraphs = buttonId.querySelectorAll("p"),
+    readMoreNewButton = document.createElement("a")
+
+  readMoreVar = buttonId.querySelector("#readMore")
+  postp = buttonId.querySelector("#" + id + "p")
+
+  readMoreVar.classList.toggle("hidden")
+  buttonId.appendChild(newElement)
+  newElement.id = "readMoreNewParagraph"
+  postp.innerHTML = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidulabore et dolore aliquyam erat, sed diam. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  ab ratione"
+  newElement.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus porro quaerat impedit voluptatum minus provident voluptatibus soluta? Doloremque, voluptatum. Molestias error blanditiis reprehenderit, magni recusandae rem alias impedit corrupti? Quis officia obcaecati quia esse alias aliquid consequatur reiciendis molestias sint error, harum et amet quisquam blanditiis, illum dolor beatae quam temporibus veniam voluptatum assumenda ipsa. Soluta officiis nam fuga ipsa quae deserunt odio culpa ullam tempore saepe autem explicabo cumque at nostrum perferendis rerum, pariatur animi necessitatibus. Excepturi deleniti quis magnam exercitationem non voluptatum, dolor obcaecati enim, possimus asperiores ratione deserunt quos nesciunt qui perferendis natus maiores temporibus ipsa reiciendis fugit, ad ut omnis repudiandae. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione qui ex eaque, a, cumque deleniti sed quia aut! Earum accusamus eum modi animi dolor praesentium molestiae quisquam, quod sapiente aliquam quas libero vitae in corrupti labore illo magnam. Iste odio eveniet amet quasi voluptatibus incidunt eaque maxime minus, dolores laudantium corporis sapiente in voluptates veritatis odit at, quaerat voluptate, nisi porro natus perspiciatis! Hic tempora, illo quis, numquam quas neque pariatur quod magnam sed minus nisi quidem vitae id corporis odit, impedit saepe asperiores facere ab ut? Consectetur sunt sit fuga. Dolore, deleniti. Quidem non quae voluptatum culpa illum provident veritatis quaerat voluptate reprehenderit mollitia repudiandae dolores debitis ducimus sequi ea fuga, unde perspiciatis eligendi? Doloribus amet corporis magnam iste nisi! Veritatis et delectus earum expedita aut asperiores ratione eaque tempore vitae nulla necessitatibus inventore tenetur temporibus hic ipsa iste a quos molestiae quis laborum nam, corporis impedit laboriosam porro? Corrupti laudantium eius quam tempora quos iusto voluptate?"
+  newElement.style.margin = "0"
+  buttonId.appendChild(readMoreNewButton)
+  readMoreNewButton.id = "readMoreNewButton"
+  readMoreNewButton.onclick = readLess
+  readMoreNewButton.innerHTML = "Read less"
+  readMoreNewButton.style.cursor = "pointer"
+  newElement.style.animation = "1s height"
+}
+
+function readLess() {
+  let readMoreNewParagraph = document.getElementById("readMoreNewParagraph"),
+    readMoreNewButton = document.getElementById("readMoreNewButton")
+  readMoreNewParagraph.remove()
+  readMoreNewButton.remove()
+  readMoreVar.classList.toggle("hidden")
+  postp.innerHTML = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidulabore et dolore aliquyam erat, sed diam."
+
+}
+function activeButton(){
+  activeButtonVar = latestworksid.getElementById("activeButton")
+  activeButtonVar.removeAttribute("id")
 }

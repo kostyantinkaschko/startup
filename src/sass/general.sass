@@ -95,7 +95,10 @@ body
                         border-radius: 20%
                         background: #000
                         animation: button 2s infinite
-
+    .flex
+        display: flex
+    .column-gap40
+        column-gap: 40rem
     main
         .wrapper
             .services
@@ -253,6 +256,8 @@ body
                                 text-align: center
                                 text-decoration: none
                                 &:hover
+                                    filter: invert(1)
+                                &#activeButton
                                     color: #c0301c
                 .bottomside
                     figure.works
@@ -388,8 +393,6 @@ body
                 figure
 
                     figcaption
-                        display: flex
-                        column-gap: 40rem
                         .img
                             img
                                 max-width: 488rem
@@ -673,6 +676,8 @@ body
         height: 2rem
         background-color: #555
         text-align: center
+    .hidden
+        display: none
 
     img
         user-select: none
@@ -738,3 +743,8 @@ body
         background-Color: rgba(255,0,0,0.5)
     100%
         background-Color: rgba(0,0,0,0.5)
+@keyframes height
+    0%
+        height: 0%
+    100%
+        height: 100%    
