@@ -27,7 +27,9 @@ let click = 0,
   footerContent = document.getElementById("footerContent"),
   footer = document.getElementById("footer"),
   emailRexExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  phoneRexExp = /^(?:\+380|380|0)(?:[1-9][0-9]{0,1})[0-9]{8}$/
+  scrollY1px = 0,
+  fixedScrollY1px = 0,
+  lastScrollY = 0
 
 document.addEventListener("DOMContentLoaded", event => {
   header.style.animation = "1.8s opacity"
@@ -43,6 +45,29 @@ document.addEventListener("DOMContentLoaded", () => {
   companiesBlock.style.opacity = "0"
   footerContent.style.opacity = "0"
   footer.style.opacity = "0"
+
+  if (localStorage.username) {
+    document.getElementById("name").value = localStorage.username
+  }
+  if (localStorage.email) {
+    document.getElementById("email").value = localStorage.email
+  }
+  if (localStorage.subject) {
+    document.getElementById("subject").value = localStorage.subject
+  }
+  if (localStorage.companyName) {
+    document.getElementById("companyName").value = localStorage.companyName
+  }
+  if (localStorage.message) {
+    document.getElementById("message").value = localStorage.message
+  }
+
+
+  // localStorage.setItem("username", username)
+  // localStorage.setItem("email", email)
+  // localStorage.setItem("subject", subject)
+  // localStorage.setItem("companyName", companyName)
+  // localStorage.setItem("message", message)
 })
 
 
@@ -189,52 +214,84 @@ let parallaxInterval = setInterval(() => {
   }
 }, 1)
 
-document.addEventListener("scroll", event => {
-  if (scrollY > 700) {
-    centerContent.style.margin = "70rem 0 412rem 0"
-    topLine.style.position = "fixed"
-    topLine.style.width = "93%"
-    topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
-    topLine.style.left = "0"
-    topLine.style.padding = "20rem 62rem"
-    topLine.style.top = "-40rem"
-    // topLine.style.transition = "all 1s ease"
-    topLine.style.animation = "40s backgroundTopLine infinity"
-  } else {
+
+document.addEventListener("scroll", () => {
+  let currentScrollY = window.scrollY
+
+  if (currentScrollY > lastScrollY) {
     topLine.removeAttribute("style")
     centerContent.removeAttribute("style")
+  } else {
+    if (currentScrollY > 700) {
+      topLine.style.transition = "all 1s ease"
+      topLine.style.position = "fixed"
+      centerContent.style.margin = "70rem 0 429rem 0"
+      topLine.style.width = "93%"
+      topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
+      topLine.style.left = "0"
+      topLine.style.padding = "20rem 62rem"
+      topLine.style.top = "-40rem"
+      topLine.style.animation = "40s backgroundTopLine infinite"
+    } else {
+      topLine.removeAttribute("style")
+      centerContent.removeAttribute("style")
+    }
   }
-  if (scrollY > 268) {
+
+  lastScrollY = currentScrollY
+
+  if (currentScrollY > 268) {
     services.style.opacity = "1"
     services.style.animation = "1s opacity"
   }
-  if (scrollY > 780.7999877929688) {
+  if (currentScrollY > 780) {
     aboutus.style.opacity = "1"
     aboutus.style.animation = "1s opacity"
   }
-  if (scrollY > 1780) {
+  if (currentScrollY > 1780) {
     latestworksid.style.opacity = "1"
     latestworksid.style.animation = "1s opacity"
   }
-  if (scrollY > 2544) {
+  if (currentScrollY > 2544) {
     proaboutwork.style.opacity = "1"
     proaboutwork.style.animation = "1s opacity"
   }
-  if (scrollY > 3200) {
+  if (currentScrollY > 3200) {
     recentsPosts.style.opacity = "1"
     recentsPosts.style.animation = "1s opacity"
   }
-  if (scrollY > 4100) {
+  if (currentScrollY > 4100) {
     companiesBlock.style.opacity = "1"
     companiesBlock.style.animation = "1s opacity"
   }
-  if (scrollY > 4700) {
+  if (currentScrollY > 4700) {
     footerContent.style.opacity = "1"
     footerContent.style.animation = "1s opacity"
   }
-  if (scrollY > 5100) {
+  if (currentScrollY > 5100) {
     footer.style.opacity = "1"
     footer.style.animation = "1s opacity"
   }
 })
 
+
+function send() {
+  let username = document.getElementById("name").value,
+    email = document.getElementById("email").value,
+    subject = document.getElementById("subject").value,
+    companyName = document.getElementById("companyName").value,
+    message = document.getElementById("message").value,
+    emailCheck = emailRexExp.test(email)
+
+
+  if (emailCheck) {
+    let userDataConfirmed = confirm('Чи правильно ви все вказали?')
+  } else if(!emailCheck){
+    alert("You write uncorrect email")
+  }
+  localStorage.setItem("username", username)
+  localStorage.setItem("email", email)
+  localStorage.setItem("subject", subject)
+  localStorage.setItem("companyName", companyName)
+  localStorage.setItem("message", message)
+}

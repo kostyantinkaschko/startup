@@ -2,6 +2,7 @@
 
 html
     font-size: 1px
+    scroll-behavior: smooth
 
 .wrapper
     max-width: 1140rem
@@ -10,6 +11,7 @@ html
 
 body
     margin: 0
+    scroll-behavior: smooth
     header
         margin-bottom: 100rem
         background: url(../img/startup-hero-bg.jpg)
@@ -32,7 +34,7 @@ body
                 justify-content: space-between
                 align-items: center
                 margin: 40rem 0 0 0
-                transition: all 1s ease
+                // transition: all 1s ease
                 z-index: 99999
                 .logo
                     a
@@ -572,7 +574,8 @@ body
                         &:placeholder-shown
                             text-transform: uppercase
                     textarea,
-                    input
+                    input,
+                    a
                         font-family: "Roboto Slab"
                         border: 1rem solid #555555
                         background: #fff
@@ -584,10 +587,11 @@ body
                         display: flex
                         align-items: center
                         column-gap: 37rem
-                        input[type="submit"]
+                        a
                             padding: 18rem 35rem
                             color: #555555
                             text-transform: uppercase
+                            cursor: pointer
                         &:hover
                             color: #c0301c
                         span

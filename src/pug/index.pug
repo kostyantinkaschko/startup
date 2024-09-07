@@ -11,26 +11,26 @@ html(lang="uk")
     link(rel="shortcut icon" href="img/logo.png" type="image/x-icon")
     title Startup
   body
-    header 
+    header#home 
       .wrapper.header
         .topline#topline
           .logo 
             a(href="#")  Startup
           ul.menu 
             li
-              a(href="#") Home
+              a(href="#home") Home
             li
-              a(href="#") Services
+              a(href="#services") Services
             li
-              a(href="#") About
+              a(href="#aboutus") About
             li
-              a(href="#") Works
+              a(href="#latestworksid") Works
             li
-              a(href="#") Blog
+              a(href="#recentsPosts") Blog
             li
               a(href="#") Clients
             li  
-              a(href="#") Contact
+              a(href="#footerContent") Contact
         .center-content#centerContent
           h1 Welcome to STARTUP
           p Your Favourite Creative Agency Template
@@ -156,16 +156,16 @@ html(lang="uk")
 
 
           .form 
-            form(action="#" method="post")
+            form(action="#" method="post") // method="get"
               .firstInputs 
-                input(type="text" name="text" placeholder="Your name")
-                input(type="text" name="text" placeholder="Your e-mail")
+                input(type="text" name="text" id="name" placeholder="Your name" required)
+                input(type="text" name="text" id="email" placeholder="Your e-mail" required)
               .secondInputs
-                input(type="text" name="text" placeholder="Your Subject")
-                input(type="text" name="text" placeholder="Company name")
-              textarea(name="message" placeholder="Write your message")
+                input(type="text" name="text" id="subject" placeholder="Your Subject" required)
+                input(type="text" name="text" id="companyName" placeholder="Company name" required)
+              textarea(name="message" id="message" placeholder="Write your message" required)
               .submit
-                input(type="submit" value="Send message") 
+                a(value="Send message" onclick="send()") submit
                 p 
                   span * 
                   | We’ll contact you as as possible. We don’t reply on Monday.
