@@ -4,14 +4,41 @@ html
     font-size: 1px
     scroll-behavior: smooth
 
-.wrapper
-    max-width: 1140rem
-    margin: 0 auto
-    padding: 0 20rem
+.custom-scrollbar::-webkit-scrollbar
+    width: 15rem
+
+.custom-scrollbar::-webkit-scrollbar-track
+    background: radial-gradient(#000, #000)
+
+.custom-scrollbar::-webkit-scrollbar-thumb
+    background: radial-gradient(#c0301c, red)
+    height: 260rem
+    border-radius: 10rem
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover
+    background: red
 
 body
     margin: 0
     scroll-behavior: smooth
+    .falshScrollBar
+        position: absolute
+        right: 0
+        width: 14.7rem
+        height: 100%
+        background: #000
+        margin-left: 5rem
+        .scrollBar
+            background: radial-gradient(#c0301c, red)
+            height: 260rem
+            border-radius: 10rem
+    .hide
+        display: none
+    .wrapper
+        max-width: 1140rem
+        margin: 0 auto
+        padding: 0 20rem
+
     header
         margin-bottom: 100rem
         background: url(../img/startup-hero-bg.jpg)
@@ -33,7 +60,11 @@ body
                 display: flex
                 justify-content: space-between
                 align-items: center
+                flex-direction: column
                 margin: 40rem 0 0 0
+                row-gap: 30rem
+                +media(730)
+                    flex-direction: row
                 // transition: all 1s ease
                 z-index: 99999
                 .logo
@@ -45,9 +76,10 @@ body
                         text-decoration: none
                         &:hover
                             color: #c0301c
-                .menu
+                ul.menu
                     display: flex
                     column-gap: 35rem
+                    padding: 0
                     li
                         a
                             font-size: 14rem
@@ -95,10 +127,79 @@ body
                         border-radius: 20%
                         background: #000
                         animation: button 2s infinite
+        #popup.hide
+            display: none
+        #popup
+            position: absolute
+            display: flex
+            top: 50%
+            left: 50%
+            padding: 40rem 20rem 20rem 20rem
+            transform: translate(-50%, -50%)
+            background: #fff
+            z-index: 99999
+            form
+                display: flex
+                flex-direction: column
+                row-gap: 15rem
+                margin-top: 15rem
+                textarea
+                    max-height: 216rem
+                    max-width: 938rem
+                    min-width: 234rem
+                    min-height: 26rem
+                    width: 690rem
+                    padding: 18rem
+                    height: 105rem
+                    font-size: 12rem
+                    &:placeholder-shown
+                        text-transform: uppercase
+                textarea,
+                input,
+                a
+                    padding: 18rem 20rem
+                    color: #555555
+                    cursor: pointer
+                    font-family: "Roboto Slab"
+                    border: 1rem solid #555555
+                    background: #fff
+                    outline: none
+                    font-size: 16rem
+                    color: #000
+                    &:focus,
+                    &:hover
+                        border-color: #c0301c
+                    &:hover
+                        color: #c0301c
+                a
+                    text-align: center
+            .cross
+                position: absolute
+                top: 2%
+                right: 3%
+                width: 35rem
+                height: 40rem
+                transform: rotate(45deg)
+                &::before
+                    content: "+"
+                    font-size: 35rem
+                    position: absolute
+                    right: 18%
+                    top: -20%
+                &:hover
+                    &::before
+                        color: #c0301c
+
     .flex
         display: flex
+        flex-direction: column-reverse
+        align-items: center
+        justify-content: center
+        +media(890)
+            flex-direction: row
     .column-gap40
         column-gap: 40rem
+        row-gap: 40rem
     main
         .wrapper
             .services
@@ -175,13 +276,25 @@ body
                 text-align: left
                 column-gap: 30rem
                 row-gap: 30rem
+            .sliderBlock
+                display: flex
+                column-gap: 30rem
+                transition: all 1s ease
 
             figure#slider
+
                 position: relative
                 display: flex
                 column-gap: 30rem
                 margin: 0
                 text-align: center
+                overflow: hidden
+                max-width: 555rem
+                +media(1185)
+                    max-width: 1140rem
+                +media(880)
+                    max-width: 850rem
+
                 figcaption
                     img
                             // height: 40rem
@@ -190,6 +303,36 @@ body
                         text-transform: uppercase
                         color: #555555
                         font-family: "Myriad Pro"
+                    #slider figcaption
+                        flex: 0 0 100%
+                        transition: transform 0.5s ease-in-out
+
+                #slider
+                    display: flex
+                    width: 99%
+                    overflow: hidden
+                    position: relative
+
+                    #slider
+                        img
+                            width: 100%
+                            display: block
+
+                    #sliderButtons
+                        position: absolute
+                        top: 50%
+                        width: 100%
+                        display: flex
+                        justify-content: space-between
+                        transform: translateY(-50%)
+
+                    #left, #right
+                        background: rgba(0, 0, 0, 0.5)
+                        color: white
+                        border: none
+                        padding: 10rem
+                        cursor: pointer
+
             #sliderButtons
                 position: absolute
                 width: 100%
@@ -263,6 +406,7 @@ body
                     figure.works
                         display: flex
                         flex-wrap: wrap
+                        justify-content: center
                         column-gap: 30rem
                         row-gap: 30rem
                         margin: 0
@@ -394,12 +538,27 @@ body
 
                     figcaption
                         .img
+                            width: 100%
+                            +media(890)
+                                width: auto
                             img
-                                max-width: 488rem
+                                width: 100%
+                                +media(890)
+                                    width: 330rem
+                                +media(1030)
+                                    width: 488rem
                         .first-header
+                            text-align: center
+                            +media(890)
+                                text-align: left
                             .date-header
                                 display: flex
                                 column-gap: 27rem
+                                justify-content: center
+                                align-items: center
+                                +media(890)
+                                    justify-content: start
+                                    align-items: start
                                 .date
                                     padding: 0 5rem 0 0
                                     width: 70rem
@@ -460,6 +619,19 @@ body
                         column-gap: 60rem
                         align-items: center
                         margin-bottom: 63rem
+                        flex-direction: column
+                        row-gap: 30rem
+                        +media(1080 )
+                            flex-direction: row
+                        .firstCompanies,
+                        .secondCompanies
+                            display: flex
+                            column-gap: 60rem
+                            align-items: center
+                            flex-direction: column
+                            row-gap: 30rem
+                            +media(580)
+                                flex-direction: row
                     p
                         color: #555555
                         font-weight: 400
@@ -534,6 +706,11 @@ body
                 display: flex
                 justify-content: space-between
                 width: 100%
+                flex-direction: column
+                align-items: center
+                row-gap: 30rem
+                +media(1160)
+                    flex-direction: row
                 .contacts
                     .adress,
                     .hotline,
@@ -557,23 +734,37 @@ body
                     flex-direction: column
                     column-gap: 19rem
                     row-gap: 19rem
+                    align-items: center
                     .firstInputs,
                     .secondInputs
                         display: flex
                         align-items: center
+                        flex-direction: column
+                        column-gap: 30rem
+                        row-gap: 30rem
+                        width: 100%
+                        +media(760)
+                            flex-direction: row
+                            column-gap: 0
+                            row-gap: 0
                         input
                             padding: 18rem
-                            width: 100%
                             font-family: "Roboto Slab"
                             font-size: 12rem
+                            +media(760)
+                                width: 100%
                             &:placeholder-shown
                                 text-transform: uppercase
                         input:first-child
-                            margin-right: 28rem
+                            +media(760)
+                                margin-right: 28rem
                     textarea
                         padding: 18rem
                         height: 105rem
                         font-size: 12rem
+                        width: 20.9%
+                        +media(760)
+                            width: 94.8%
                         &:placeholder-shown
                             text-transform: uppercase
                     textarea,
@@ -590,6 +781,11 @@ body
                         display: flex
                         align-items: center
                         column-gap: 37rem
+                        flex-direction: column-reverse
+                        row-gap: 15rem
+                        width: 100%
+                        +media(1160)
+                            flex-direction: row
                         a
                             padding: 18rem 35rem
                             color: #555555
@@ -617,7 +813,7 @@ body
                         top: 0
                         width: 40rem
                         height: 40rem
-                        border: 3px solid #fff
+                        border: 3rem solid #fff
                         border-radius: 50%
                         transition: all .5s ease
                         animation: invert .5s reverse
@@ -661,8 +857,8 @@ body
                         left: 50%
                         transform: translate(-50%, -50%)
                 p
-                    font-size: 12px
-                    line-height: 20px
+                    font-size: 12rem
+                    line-height: 20rem
                     color: #ffffff
                     font-weight: 400
                     font-family: "Roboto Slab"
@@ -681,8 +877,12 @@ body
 
     img
         user-select: none
-    textarea
+    textarea:last-child
         resize: vertical
+    .margin
+        padding-right: 35rem
+body.no-scroll
+    overflow: hidden
 @font-face
     font-family: 'Montserrat'
     src: url('../fonts/Montserrat-Bold.woff2') format('woff2'), url('../fonts/Montserrat-Bold.woff') format('woff')
@@ -735,10 +935,7 @@ body
 
 @keyframes backgroundTopLine
     0%
-        width: 100%
         background-Color: rgba(0,0,0,0.5)
-    1%
-        width: 93%
     50%
         background-Color: rgba(255,0,0,0.5)
     100%
@@ -747,4 +944,4 @@ body
     0%
         height: 0%
     100%
-        height: 100%    
+        height: 100%

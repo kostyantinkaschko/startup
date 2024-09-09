@@ -14,6 +14,7 @@ let click = 0,
   totalCites = 3,
   nextCite = 2,
   header = document.querySelector('header'),
+  headerWrapper = header.querySelector(".wrapper"),
   topLine = document.getElementById('topline'),
   propaboutwork = document.querySelector(".propaboutwork"),
   circleDOM = document.querySelectorAll(".circle"),
@@ -32,7 +33,17 @@ let click = 0,
   lastScrollY = 0,
   readMoreVar = 0,
   postp = 0,
-  activeButtonVar = 0
+  activeButtonVar = 0,
+  waitVarForAnimation = false,
+  popup = document.getElementById("popup"),
+  falshScrollBar = document.getElementById("falshScrollBarId"),
+  getStartedButton = document.getElementById("getStartedButton"),
+  popUpOpenRights = false,
+  infinitySlider = false,
+  slider = document.querySelector('.sliderBlock'),
+  slides = document.querySelectorAll('#slider figcaption'),
+  currentIndex = 0,
+  logo = document.querySelector("#logo")
 document.addEventListener("DOMContentLoaded", event => {
   header.style.animation = "1.8s opacity"
   header.style.opacity = "1"
@@ -47,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   companiesBlock.style.opacity = "0"
   footerContent.style.opacity = "0"
   footer.style.opacity = "0"
+  getStartedButton.classList.toggle("disabledButton")
 
   if (localStorage.username) {
     document.getElementById("name").value = localStorage.username
@@ -64,12 +76,48 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("message").value = localStorage.message
   }
 
-
-  // localStorage.setItem("username", username)
-  // localStorage.setItem("email", email)
-  // localStorage.setItem("subject", subject)
-  // localStorage.setItem("companyName", companyName)
-  // localStorage.setItem("message", message)
+  function updateSlider() {
+    let offset = -12.7 * currentIndex
+    if (offset <= -50 && window.innerWidth >= 1185) {
+      offset = -50.8
+      infinitySlider = true
+    } else if (offset <= -63.3 && window.innerWidth <= 1185) {
+      offset = -63.3
+      infinitySlider = true
+    }
+    slider.style.transform = `translateX(${offset}%)`
+    if (infinitySlider) {
+      waitVarForAnimation = true
+      setTimeout(event => {
+        slider.style.transition = "none"
+        currentIndex = 0
+        slider.style.transform = `translateX(${offset}%)`
+        slider.style.transition = "all 1s ease"
+      }, 1800)
+    }
+  }
+  if (!waitVarForAnimation) {
+    document.querySelector('#left').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1)
+      if (currentIndex < 0) {
+        currentIndex = 4
+        offset = -12.7 * currentIndex
+        slider.style.transition = "none"
+        slider.style.transform = `translateX(${offset}%)`
+        setTimeout(event => {
+          slider.style.transition = "all 1s ease"
+          currentIndex = 3
+          offset = -12.7 * currentIndex
+          slider.style.transform = `translateX(${offset}%)`
+        }, 100)
+      }
+      updateSlider()
+    })
+    document.querySelector('#right').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1)
+      updateSlider()
+    })
+  }
 })
 
 
@@ -214,8 +262,19 @@ let parallaxInterval = setInterval(() => {
   if (topLine && scrollX < 49) {
     topLine.class = 'top-line toplineFixed'
   }
+
+  if (window.innerWidth < 730) {
+    logo.classList.add("hidden")
+  }
+  if (scrollY < 700) {
+    logo.classList.remove("hidden")
+  }
 }, 1)
 
+let disabledButton = setInterval(() => {
+  getStartedButton.classList.toggle("disabledButton")
+  popUpOpenRights = true
+}, 2000)
 
 document.addEventListener("scroll", () => {
   let currentScrollY = window.scrollY
@@ -228,7 +287,11 @@ document.addEventListener("scroll", () => {
       topLine.style.transition = "all 1s ease"
       topLine.style.position = "fixed"
       centerContent.style.margin = "70rem 0 429rem 0"
-      topLine.style.width = "93%"
+      if (window.innerWidth > 740) {
+        topLine.style.width = "93%"
+      } else {
+        topLine.style.width = "83%"
+      }
       topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
       topLine.style.left = "0"
       topLine.style.padding = "20rem 62rem"
@@ -284,8 +347,6 @@ function send() {
     companyName = document.getElementById("companyName").value,
     message = document.getElementById("message").value,
     emailCheck = emailRexExp.test(email)
-
-
   if (emailCheck) {
     let userDataConfirmed = confirm('Чи правильно ви все вказали?')
   } else if (!emailCheck) {
@@ -330,7 +391,18 @@ function readLess() {
   postp.innerHTML = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidulabore et dolore aliquyam erat, sed diam."
 
 }
-function activeButton(){
+
+function activeButton() {
   activeButtonVar = latestworksid.getElementById("activeButton")
   activeButtonVar.removeAttribute("id")
 }
+
+function popUp() {
+  if (popUpOpenRights) {
+    popup.classList.toggle("hide")
+    falshScrollBar.classList.toggle("hide")
+    document.body.classList.toggle("no-scroll")
+    headerWrapper.classList.toggle("margin")
+  }
+}
+

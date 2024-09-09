@@ -405,4 +405,3 @@ function popUp() {
     headerWrapper.classList.toggle("margin")
   }
 }
-

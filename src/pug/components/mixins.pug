@@ -6,12 +6,11 @@ mixin services(name, id)
         p #{figure[name].desc}
 
 mixin people(name)
-    figcaption#slider
-        each person, index in people
-            .slide(data-index=index)
-                img(src=person.src, alt=person.alt)
-                h2 #{person.name}
-                p #{person.header}
+    figcaption
+        img(src=people[name].src, alt=people[name].alt)
+        h2 #{people[name].name}
+        p #{people[name].header}
+
 mixin works(name)
     figcaption
         img(src=works[name].src, alt=works[name].alt)
