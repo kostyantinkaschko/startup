@@ -40,12 +40,10 @@ html(lang="uk")
       #popup.hide
         .cross(onclick="popUp()")
         form(action="#" method="post")
-          input(type="text" name="text" id="name" placeholder="Your name" required)
-          input(type="text" name="text" id="email" placeholder="Your e-mail" required)
-          input(type="text" name="text" id="subject" placeholder="Your Subject" required)
-          input(type="text" name="text" id="companyName" placeholder="Company name" required)
-          textarea(name="message" id="message" placeholder="Write your message" required)
-          a(value="Send message" onclick=`send("popup")`) Submit
+          input(type="text" name="login" id="login" placeholder="Your login" required)
+          input(type="password" name="password" id="password" placeholder="Your pass")
+          a(href="#") Submit
+
       .scrollBarFix
 
 
@@ -87,15 +85,15 @@ html(lang="uk")
             .line
             ul.latestworks 
               li
-                a(href="#bottomside" onclick="activeButton()")#activeButton All
+                a(href="javascript:void(0)" class="firstButt" onclick="activeButton(null, 'firstButt')")#activeButton All
               li
-                a(href="#bottomside" onclick="activeButton()") Branding
+                a(href="javascript:void(0)" class="secondButt" onclick="activeButton('Branding', 'secondButt')") Branding
               li
-                a(href="#bottomside" onclick="activeButton()") Design
+                a(href="javascript:void(0)" class="thirdButt" onclick="activeButton('Design', 'thirdButt')") Design
               li
-                a(href="#bottomside" onclick="activeButton()") Development
+                a(href="javascript:void(0)" class="fourButt" onclick="activeButton('Development', 'fourButt')") Development
               li
-                a(href="#bottomside" onclick="activeButton()") Strategy
+                a(href="javascript:void(0)" class="fiveButt" onclick="activeButton('Strategy', 'fiveButt')") Strategy
           .bottomside#bottomside
             figure.works
               +works("first") 
@@ -134,7 +132,7 @@ html(lang="uk")
                 img(src="img/fourLogo.png" alt="#")
                 img(src="img/fiveLogo.png" alt="#")
             .cite-slider
-              p.first.activeCite#firstCite Hvaing placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum” John Doe, Google Inc.
+              p.first.activeCite#firstCite Hvaing placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum”.
               p.first#secondCite All paths will one day come to an end. There's no need to rush.
               p.first#thirdCite The landscape of mortality does not change for centuries, but human life is like autumn dew or a bubble on the water. Nothingness.
             p#second John Doe, Google Inc.

@@ -10,14 +10,15 @@ mixin people(name)
         img(src=people[name].src, alt=people[name].alt)
         h2 #{people[name].name}
         p #{people[name].header}
-
+        
 mixin works(name)
-    figcaption
+    figcaption(class=works[name].category)
         img(src=works[name].src, alt=works[name].alt)
         .hover 
-            h2 Hair Dresser
-            p Branding
+            h2 #{works[name].header}
+            p #{works[name].category} 
             a(href="#") View
+
 mixin blog(name, id)
     figcaption(id=blog[name].id)
         .flex.column-gap40
