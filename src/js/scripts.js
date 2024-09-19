@@ -172,6 +172,48 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
+  
+slider.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX 
+})
+
+slider.addEventListener('touchend', (e) => {
+  const endX = e.changedTouches[0].clientX
+  const diffX = startX - endX
+
+  if (Math.abs(diffX) > 50) {
+    if (diffX > 0) {
+      currentIndex++
+      if (currentIndex >= totalSlides) {
+        currentIndex = 0
+        slider.style.transition = "none"
+        updateSlider()
+        setTimeout(() => {
+          slider.style.transition = "all 1s ease"
+          currentIndex = 1
+          updateSlider()
+        }, 100)
+      } else {
+        updateSlider()
+      }
+    } else {
+      currentIndex--
+      if (currentIndex < 0) {
+        currentIndex = totalSlides - 1
+        slider.style.transition = "none"
+        updateSlider()
+        setTimeout(() => {
+          slider.style.transition = "all 1s ease"
+          currentIndex = totalSlides - 2
+          updateSlider()
+        }, 100)
+      } else {
+        updateSlider()
+      }
+    }
+  }
+})
+
 })
 
 
