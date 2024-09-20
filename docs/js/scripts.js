@@ -576,7 +576,6 @@ function smoothScrollTo(targetPosition) {
     duration = 100,
     interval = 10,
     elapsed = 0
-  console.log(targetPosition)
   let scrollInterval = setInterval(() => {
     elapsed += interval
     let progress = elapsed / duration,
