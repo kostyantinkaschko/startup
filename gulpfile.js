@@ -100,6 +100,18 @@ export const fonts = () => {
     }))
 }
 
+
+export const json = () => {
+    return gulp
+    .src([
+        "src/json/**/*.*"
+    ], {dot: true})
+    .pipe(gulp.dest("docs/json"))
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+}
+
 export const images = () => {
     return gulp
     .src([
@@ -126,6 +138,7 @@ export const watch = () => {
     gulp.watch("src/pug/**/*.pug", gulp.parallel(html))
     gulp.watch("src/*.*", gulp.parallel(files))
     gulp.watch("src/fonts/**/*.*", gulp.parallel(fonts))
+    gulp.watch("src/json/**/*.*", gulp.parallel(json))
     gulp.watch("src/img/*.*", gulp.parallel(images))
 }
 
@@ -139,6 +152,7 @@ export default gulp.series(
         files,
         fonts,
         images,
-        browserSyncFunc
+        browserSyncFunc,
+        json
     )
 )

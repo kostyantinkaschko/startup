@@ -43,11 +43,13 @@ let click = 0,
   slider = document.querySelector('.sliderBlock'),
   slides = document.querySelectorAll('#slider figcaption'),
   currentIndex = 0,
-  logo = document.querySelector("#logo"),
+  logo = document.getElementById("logo"),
   bottomside = document.getElementById("bottomside"),
   setActiveCategory = null,
   idLogin = document.getElementById("login"),
-  passwordId = document.getElementById("password")
+  passwordId = document.getElementById("password"),
+  parallaxInterval = false,
+  menu = document.querySelector(".menu")
 document.addEventListener("DOMContentLoaded", event => {
   header.style.animation = "1.8s opacity"
   header.style.opacity = "1"
@@ -108,14 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isDragging) {
       let leftVar = `${e.clientX - offsetX + popup.clientHeight / 1.8}`,
         topVar = `${e.clientY - offsetY + popup.clientWidth / 2.1}`
-      if (leftVar > 132.7857507324219 && leftVar < 1387.876437717014) {
+      if (leftVar > 132 && leftVar < window.innerWidth / 1.095) {
         popup.style.left = leftVar + "rem"
+        localStorage.setItem('positionX', leftVar)
       }
       if (topVar < 608.9964999389648 && topVar > 126.92678557123456) {
         popup.style.top = topVar + "rem"
+        localStorage.setItem('positionY', topVar)
       }
-      localStorage.setItem('positionX', leftVar)
-      localStorage.setItem('positionY', topVar)
       idLogin.setAttribute("readonly", true)
       passwordId.setAttribute("readonly", true)
       idLogin.style.text
@@ -172,47 +174,47 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  
-slider.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX 
-})
 
-slider.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX
-  const diffX = startX - endX
+  // slider.addEventListener('touchstart', (e) => {
+  //   startX = e.touches[0].clientX
+  // })
 
-  if (Math.abs(diffX) > 50) {
-    if (diffX > 0) {
-      currentIndex++
-      if (currentIndex >= totalSlides) {
-        currentIndex = 0
-        slider.style.transition = "none"
-        updateSlider()
-        setTimeout(() => {
-          slider.style.transition = "all 1s ease"
-          currentIndex = 1
-          updateSlider()
-        }, 100)
-      } else {
-        updateSlider()
-      }
-    } else {
-      currentIndex--
-      if (currentIndex < 0) {
-        currentIndex = totalSlides - 1
-        slider.style.transition = "none"
-        updateSlider()
-        setTimeout(() => {
-          slider.style.transition = "all 1s ease"
-          currentIndex = totalSlides - 2
-          updateSlider()
-        }, 100)
-      } else {
-        updateSlider()
-      }
-    }
-  }
-})
+  // slider.addEventListener('touchend', (e) => {
+  //   let endX = e.changedTouches[0].clientX,
+  //     diffX = startX - endX
+
+  //   if (Math.abs(diffX) > 50) {
+  //     if (diffX > 0) {
+  //       currentIndex++
+  //       if (currentIndex >= totalSlides) {
+  //         currentIndex = 0
+  //         slider.style.transition = "none"
+  //         updateSlider()
+  //         setTimeout(() => {
+  //           slider.style.transition = "all 1s ease"
+  //           currentIndex = 1
+  //           updateSlider()
+  //         }, 100)
+  //       } else {
+  //         updateSlider()
+  //       }
+  //     } else {
+  //       currentIndex--
+  //       if (currentIndex < 0) {
+  //         currentIndex = totalSlides - 1
+  //         slider.style.transition = "none"
+  //         updateSlider()
+  //         setTimeout(() => {
+  //           slider.style.transition = "all 1s ease"
+  //           currentIndex = totalSlides - 2
+  //           updateSlider()
+  //         }, 100)
+  //       } else {
+  //         updateSlider()
+  //       }
+  //     }
+  //   }
+  // })
 
 })
 
@@ -351,21 +353,25 @@ let tripleClickInterval = setInterval(() => {
   }, 500),
   citesInterval = startCitesInterval()
 
-
-let parallaxInterval = setInterval(() => {
-  header.style.backgroundPosition = `0 ${window.scrollY / 3}rem`
-  propaboutwork.style.backgroundPosition = `0 ${(window.scrollY - 4900) / 3}rem`
-  if (topLine && scrollX < 49 && window.innerWidth >= 560) {
-    topLine.class = 'top-line toplineFixed'
-  }
-
-  if (window.innerWidth < 730) {
-    logo.classList.add("hidden")
-  }
-  if (scrollY < 700) {
-    logo.classList.remove("hidden")
-  }
-}, 1)
+if (window.innerWidth > 560) {
+  parallaxInterval = setInterval(() => {
+    header.style.backgroundPosition = `0 ${window.scrollY / 3}rem`
+    if (window.innerWidth >= 2560) {
+      propaboutwork.style.backgroundPosition = `0 -${(window.scrollY - 5500) / 3}rem`
+    } else {
+      propaboutwork.style.backgroundPosition = `0 ${(window.scrollY - 4600) / 3}rem`
+    }
+    if (topLine && scrollX < 49) {
+      topLine.class = 'top-line toplineFixed'
+    }
+    if (window.innerWidth < 840 && scrollY > 49) {
+      logo.classList.add("hidden")
+      topLine.style.justifyContent = "center"
+    } else {
+      logo.classList.remove("hidden")
+    }
+  }, 1)
+}
 
 let disabledButton = setInterval(() => {
   getStartedButton.classList.toggle("disabledButton")
@@ -383,17 +389,14 @@ document.addEventListener("scroll", () => {
       if (currentScrollY > 700) {
         topLine.style.position = "fixed"
         centerContent.style.margin = "70rem 0 429rem 0"
-        if (window.innerWidth > 740) {
-          topLine.style.width = "93%"
-        } else {
-          topLine.style.width = "83%"
-        }
-        topLine.style.padding = "20rem 62rem"
+        topLine.style.width = "100%"
+        topLine.style.padding = "20rem 0"
         topLine.style.left = "0"
         topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
         topLine.style.top = "-40rem"
         topLine.style.transition = "all 1s ease"
         topLine.style.animation = "40s backgroundTopLine infinite"
+        topLine.style.justifyContent = "space-around"
       } else {
         topLine.removeAttribute("style")
         centerContent.removeAttribute("style")
@@ -537,14 +540,13 @@ function popUp() {
     localStorage.setItem("positionX", "50%")
     popup.style.left = `${localStorage.positionX}`
   } else {
-    popup.style.left = `${localStorage.positionX}`
+    popup.style.left = `${localStorage.positionX}rem`
   }
   if (!localStorage.positionY) {
     localStorage.setItem("positionY", "50%")
     popup.style.top = `${localStorage.positionY}`
   } else {
-    popup.style.top = `${localStorage.positionY}`
-
+    popup.style.top = `${localStorage.positionY}rem`
   }
   if (popUpOpenRights) {
     popup.classList.toggle("hide")
@@ -554,5 +556,13 @@ function popUp() {
     document.body.classList.toggle("no-scroll")
     headerWrapper.classList.toggle("margin")
     centerContent.classList.toggle("margin2")
+  }
+}
+
+
+function openBurgerMenu() {
+  if (window.innerWidth < 560) {
+    document.body.classList.toggle("no-scroll")
+    menu.classList.toggle("burgerMenu")
   }
 }

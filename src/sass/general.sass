@@ -3,6 +3,8 @@
 html
     font-size: 1px
     scroll-behavior: smooth
+    +media(2560)
+        font-size: 2px
 
 .custom-scrollbar::-webkit-scrollbar
     width: 15rem
@@ -37,12 +39,16 @@ body
     .wrapper
         max-width: 1140rem
         margin: 0 auto
-        padding: 0 20rem
+        padding: 0 10rem
+        +media(470)
+            padding: 0 20rem
 
     header
         background: url(../img/startup-hero-bg.jpg)
         background-position: 0 0
-        height: 752rem
+        background-size: cover
+        +media(560)
+            height: 752rem
         .header
             display: flex
             flex-direction: column
@@ -71,23 +77,48 @@ body
                 .logo
                     a
                         color: #ffffff
-                        font-size: 24rem
+                        font-size: 40rem
                         font-weight: 700
                         font-family: "Montserrat"
                         text-decoration: none
+                        +media(560)
+                            font-size: 24
                         &:hover
                             color: #c0301c
+                .burgerMenuButton
+                    +media(560)
+                        display: none
+                    .lineBurgerMenu
+                        position: relative
+                        margin-bottom: 11rem
+                        height: 5rem
+                        width: 100rem
+
+                    .lineBurgerMenu#first
+                        border-top: 15rem solid #fff
+                        border-radius: 8rem
+                    .lineBurgerMenu#second
+                        left: 50%
+                        height: 0
+                        width: 83rem
+                        border: 8rem solid grey
+                        transform: translateX(-50%)
+                    .lineBurgerMenu#third
+                        border-bottom: 15rem solid #fff
+                        border-radius: 8rem
                 ul.menu
-                    display: flex
+                    display: none
                     column-gap: 35rem
                     padding: 0
-                    flex-direction: column
                     +media(560)
-                        flex-direction: row
+                        display: flex
                     li
                         padding: 10rem
                         +media(560)
                             padding: 0
+                        &#da
+                            +media(560)
+                                display: none
                         a
                             font-size: 14rem
                             color: #ffffff
@@ -96,14 +127,33 @@ body
                             text-decoration: none
                             &:hover
                                 color: #c0301c
+                ul.burgerMenu
+                    position: absolute
+                    top: -1rem
+                    display: flex
+                    align-items: center
+                    background: #fff
+                    flex-direction: column
+                    width: 100%
+                    height: 110%
+                    li
+                        padding: 27rem
+                        width: 82%
+                        border: 3rem solid red
+                        text-align: center
+                                            
+                        a
+                            font-size: 20rem
+                            color: #000
             .center-content
                 display: flex
                 flex-direction: column
                 align-items: center
-                position: absolute
-                top: 50%
-                left: 50%
-                transform: translate(-50%, -50%)
+                +media(560)
+                    position: absolute
+                    top: 50%
+                    left: 50%
+                    transform: translate(-50%, -50%)
                 h1
                     margin: 0 0 30rem 0
                     font-size: 48rem
@@ -256,6 +306,7 @@ body
                                 background: #c0301c
                             img
                                 filter: brightness(30)
+
                         .circle
                             display: flex
                             align-items: center
@@ -266,6 +317,9 @@ body
                             background-color: #ffffff
                             border: 2rem solid #dddddd
                             transition: all .3s ease
+                            img
+                                +media(2560)
+                                    width: 55%
                         h2
                             color: #555555
                             font-size: 14rem
@@ -276,6 +330,7 @@ body
         .aboutus
             width: 100%
             background-color: #f8f8f8
+            text-align: center
             .wrapper
                 display: flex
                 flex-direction: column
@@ -294,14 +349,18 @@ body
                 font-weight: 400
                 font-family: "Roboto Slab"
             .desc
-                display: flex
                 text-align: left
                 column-gap: 30rem
                 row-gap: 30rem
+                +media(550)
+                    display: flex
             .sliderBlock
                 display: flex
                 column-gap: 30rem
                 transition: all 1s ease
+                img
+                    +media(2560)
+                        width: 263rem
 
             figure#slider
 
@@ -390,6 +449,7 @@ body
                         content: ""
                         position: absolute
                         background: url(../img/fa-angle-right.svg)
+                        background-size: cover
                         width: 8rem
                         height: 14rem
                         top: 50%
@@ -411,9 +471,13 @@ body
                         font-family: "Montserrat"
                         text-align: center
                     ul.latestworks
-                        display: flex
                         column-gap: 25rem
+                        padding: 0
                         margin-top: 25rem
+                        text-align: center
+                        +media(480)
+                            padding: auto
+                            display: flex
                         li
                             a
                                 font-size: 16rem
@@ -491,6 +555,7 @@ body
                             content: ""
                             position: absolute
                             background: url(../img/fa-angle-right.svg)
+                            background-size: cover
                             width: 8rem
                             height: 14rem
                             top: 50%
@@ -502,12 +567,15 @@ body
             justify-content: center
             text-align: center
             background: url(../img/bg.png) no-repeat
+            background-size: cover
             .content
                 padding: 100rem
                 h2:first-child
                     margin: 0
                 h2
-                    font-size: 30rem
+                    font-size: 25rem
+                    +media(370)
+                        font-size: 30rem
                     color: #ffffff
                     font-weight: 400
                     font-family: "Roboto Slab"
@@ -516,7 +584,9 @@ body
                     margin: 15rem 0 50rem 0
                 a
                     padding: 15rem
-                    font-size: 18rem
+                    font-size: 12rem
+                    +media(370)
+                        font-size: 18rem
                     text-transform: uppercase
                     color: #ffffff
                     font-weight: 400
@@ -543,14 +613,18 @@ body
                     font-family: "Montserrat"
                     text-align: center
                 a:not(#descHyper)
+                    font-size: 15rem
                     color: #555555
-                    font-size: 16rem
                     letter-spacing: 1rem
                     text-transform: uppercase
                     font-weight: 700
                     font-family: "Montserrat"
                     text-align: center
                     text-decoration: none
+                    +media(360)
+                        font-size: 18rem
+                    +media(550)
+                        font-size: 16rem
                     &:hover
                         color: #c0301c
                 p
@@ -562,7 +636,9 @@ body
 
                     figcaption
                         .img
-                            width: 100%
+                            width: 120%
+                            +media(365)
+                                width: 100%
                             +media(890)
                                 width: auto
                             img
@@ -578,8 +654,12 @@ body
                             .date-header
                                 display: flex
                                 column-gap: 27rem
+                                row-gap: 27rem
                                 justify-content: center
                                 align-items: center
+                                flex-direction: column
+                                +media(550)
+                                    flex-direction: row
                                 +media(890)
                                     justify-content: start
                                     align-items: start
@@ -637,7 +717,9 @@ body
             background: #f8f8f8
             .wrapper
                 .info
-                    padding: 80rem 120rem
+                    padding: 80rem 0
+                    +media(720)
+                        padding: 80rem 120rem
                     .logos
                         display: flex
                         column-gap: 60rem
@@ -656,6 +738,9 @@ body
                             row-gap: 30rem
                             +media(580)
                                 flex-direction: row
+                            img
+                                +media(2560)
+                                    width: 130rem
                     p
                         color: #555555
                         font-weight: 400
@@ -664,7 +749,7 @@ body
                     .first
                         display: none
                         font-size: 18rem
-                        
+
                         +media(600)
                             height: 100rem
                     #second
@@ -709,6 +794,7 @@ body
                     flex-direction: column
                     align-items: center
                     margin-bottom: 68rem
+                    text-align: center
                     h2:first-child
                         color: #555555
                         font-size: 20rem
@@ -750,6 +836,8 @@ body
                         img
                             position: relative
                             top: 3rem
+                            +media(2560)
+                                width: 17rem
 
                 .header
                     display: flex
@@ -757,73 +845,88 @@ body
                     row-gap: 7rem
                     h2
                         margin-top: 0
-                form
-                    width: 730rem
+                .form
+                    width: 100%
                     display: flex
-                    flex-direction: column
-                    column-gap: 19rem
-                    row-gap: 19rem
-                    align-items: center
-                    .firstInputs,
-                    .secondInputs
+                    justify-content: center
+                    +media(1160)
+                        justify-content: flex-end
+                    form
                         display: flex
-                        align-items: center
                         flex-direction: column
-                        column-gap: 30rem
-                        row-gap: 30rem
+                        column-gap: 19rem
+                        row-gap: 19rem
+                        align-items: center
                         width: 100%
                         +media(760)
-                            flex-direction: row
-                            column-gap: 0
-                            row-gap: 0
-                        input
+                            width: 730rem
+                        .firstInputs,
+                        .secondInputs
+                            display: flex
+                            align-items: center
+                            flex-direction: column
+                            column-gap: 30rem
+                            row-gap: 10rem
+                            width: 100%
+                            +media(760)
+                                flex-direction: row
+                                column-gap: 0
+                                row-gap: 0
+                            input
+                                width: 70%
+                                padding: 18rem
+                                font-family: "Roboto Slab"
+                                font-size: 12rem
+                                +media(760)
+                                    width: 100%
+                                &:placeholder-shown
+                                    text-transform: uppercase
+                            input:first-child
+                                +media(760)
+                                    margin-right: 28rem
+                        textarea
+                            width: 70%
                             padding: 18rem
-                            font-family: "Roboto Slab"
+                            height: 105rem
                             font-size: 12rem
                             +media(760)
-                                width: 100%
+                                width: 94.8%
                             &:placeholder-shown
                                 text-transform: uppercase
-                        input:first-child
-                            +media(760)
-                                margin-right: 28rem
-                    textarea
-                        padding: 18rem
-                        height: 105rem
-                        font-size: 12rem
-                        width: 20.9%
-                        +media(760)
-                            width: 94.8%
-                        &:placeholder-shown
-                            text-transform: uppercase
-                    textarea,
-                    input,
-                    a
-                        font-family: "Roboto Slab"
-                        border: 1rem solid #555555
-                        background: #fff
-                        outline: none
-                        &:focus,
-                        &:hover
-                            border-color: #c0301c
-                    .submit
-                        display: flex
-                        align-items: center
-                        column-gap: 37rem
-                        flex-direction: column-reverse
-                        row-gap: 15rem
-                        width: 100%
-                        +media(1160)
-                            flex-direction: row
+                        textarea,
+                        input,
                         a
-                            padding: 18rem 35rem
-                            color: #555555
-                            text-transform: uppercase
-                            cursor: pointer
-                        &:hover
-                            color: #c0301c
-                        span
-                            color: #c0301c
+                            font-family: "Roboto Slab"
+                            border: 1rem solid #555555
+                            background: #fff
+                            outline: none
+                            &:focus,
+                            &:hover
+                                border-color: #c0301c
+                        .submit
+                            display: flex
+                            align-items: center
+                            column-gap: 37rem
+                            flex-direction: column-reverse
+                            row-gap: 15rem
+                            width: 100%
+                            +media(1160)
+                                flex-direction: row
+                            a
+                                padding: 18rem 35rem
+                                color: #555555
+                                text-transform: uppercase
+                                cursor: pointer
+                            &:hover
+                                color: #c0301c
+                            span
+                                color: #c0301c
+                            p
+                                width: 80%
+                                text-align: center
+                                +media(360)
+                                    text-align: left
+                                    width: auto
         .footer
             padding: 100rem 0
             background-color: #bf2f1b
@@ -858,24 +961,36 @@ body
                             width: 20rem
                             height: 20rem
                             background: url(../img/sprites.svg) no-repeat 2rem 5rem
+                            +media(2560)
+                                background-size: 320%
                     #fb
                         left: 58rem
                         &::after
                             width: 12rem
                             height: 14rem
                             background: url(../img/sprites.svg) no-repeat -18rem 0
+                            +media(2560)
+                                height: 17rem
+                                background: url(../img/sprites.svg) no-repeat -22rem 0
+                                background-size: 620%
                     #in
                         left: 116rem
                         &::after
                             width: 19rem
                             height: 14rem
                             background: url(../img/sprites.svg) no-repeat -28rem 0
+                            +media(2560)
+                                height: 15rem
+                                background: url(../img/sprites.svg) no-repeat -28rem 0
+                                background-size: 337%
                     #you
                         left: 175rem
                         &::after
                             width: 22rem
                             height: 14rem
                             background: url(../img/sprites.svg) no-repeat -44rem 0
+                            +media(2560)
+                                background-size: 290%
                     #tw:after,
                     #in:after,
                     #fb:after,
@@ -885,6 +1000,7 @@ body
                         top: 50%
                         left: 50%
                         transform: translate(-50%, -50%)
+
                 p
                     font-size: 12rem
                     line-height: 20rem
@@ -899,6 +1015,7 @@ body
     .line
         width: 50rem
         height: 2rem
+        margin-bottom: 20rem
         background-color: #555
         text-align: center
     .hidden

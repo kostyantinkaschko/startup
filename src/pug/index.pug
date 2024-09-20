@@ -18,21 +18,28 @@ html(lang="uk")
         .topline#topline
           .logo#logo
             a(href="#")  Startup
-          ul.menu 
+          .burgerMenuButton(onclick="openBurgerMenu()")
+            .lineBurgerMenu#first
+            .lineBurgerMenu#second
+            .lineBurgerMenu#third
+          ul.menu
+            li#da
+              a(href="javascript:void(0)" onclick="openBurgerMenu()")  <<< Back
             li
-              a(href="#home") Home
+              a(href="#home" onclick="openBurgerMenu()") Home
             li
-              a(href="#services") Services
+              a(href="#services" onclick="openBurgerMenu()") Services
             li
-              a(href="#aboutus") About
+              a(href="#aboutus" onclick="openBurgerMenu()") About
             li
-              a(href="#latestworksid") Works
+              a(href="#latestworksid" onclick="openBurgerMenu()") Works
             li
-              a(href="#recentsPosts") Blog
+              a(href="#recentsPosts" onclick="openBurgerMenu()") Blog
             li
-              a(href="#") Clients
+              a(href="#" onclick="openBurgerMenu()") Clients
             li  
-              a(href="#footerContent") Contact
+              a(href="#footerContent" onclick="openBurgerMenu()") Contact
+
         .center-content#centerContent
           h1 Welcome to STARTUP
           p Your Favourite Creative Agency Template
