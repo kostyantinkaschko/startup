@@ -566,3 +566,30 @@ function openBurgerMenu() {
     menu.classList.toggle("burgerMenu")
   }
 }
+
+
+function smoothScrollTo(targetPosition) {
+  let targetElement = document.getElementById(targetPosition)
+  targetPosition = targetElement.getBoundingClientRect().y + window.scrollY
+  let currentPosition = window.pageYOffset,
+    distance = targetPosition - currentPosition,
+    duration = 100,
+    interval = 10,
+    elapsed = 0
+  console.log(targetPosition)
+  let scrollInterval = setInterval(() => {
+    elapsed += interval
+    let progress = elapsed / duration,
+      scrollAmount = currentPosition + distance * Math.pow(progress, 2)
+
+    window.scrollTo(0, scrollAmount)
+
+    if (elapsed >= duration) {
+      clearInterval(scrollInterval)
+      window.scrollTo(0, targetPosition)
+    }
+  }, interval)
+  if(window.innerWidth < 560){
+    openBurgerMenu()
+  }
+}
