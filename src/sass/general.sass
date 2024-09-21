@@ -86,26 +86,13 @@ body
                         &:hover
                             color: #c0301c
                 .burgerMenuButton
+                    width: 100rem
+                    height: 90rem
+                    background: url(../img/burger.png)
+                    background-size: cover
                     +media(560)
                         display: none
-                    .lineBurgerMenu
-                        position: relative
-                        margin-bottom: 11rem
-                        height: 5rem
-                        width: 100rem
-
-                    .lineBurgerMenu#first
-                        border-top: 15rem solid #fff
-                        border-radius: 8rem
-                    .lineBurgerMenu#second
-                        left: 50%
-                        height: 0
-                        width: 83rem
-                        border: 8rem solid grey
-                        transform: translateX(-50%)
-                    .lineBurgerMenu#third
-                        border-bottom: 15rem solid #fff
-                        border-radius: 8rem
+                    
                 ul.menu
                     display: none
                     column-gap: 35rem
@@ -648,9 +635,6 @@ body
                                 +media(1030)
                                     width: 488rem
                         .first-header
-                            text-align: center
-                            +media(890)
-                                text-align: left
                             .date-header
                                 display: flex
                                 column-gap: 27rem
@@ -752,7 +736,8 @@ body
 
                         +media(600)
                             height: 100rem
-                    #second
+                    .second
+                        display: none
                         font-size: 20rem
                     .activeCite
                         display: block

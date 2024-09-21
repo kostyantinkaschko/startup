@@ -49,13 +49,15 @@ let click = 0,
   idLogin = document.getElementById("login"),
   passwordId = document.getElementById("password"),
   parallaxInterval = false,
-  menu = document.querySelector(".menu")
-document.addEventListener("DOMContentLoaded", event => {
-  header.style.animation = "1.8s opacity"
-  header.style.opacity = "1"
-})
+  menu = document.querySelector(".menu"),
+  burgerMenuButton = document.querySelector(".burgerMenuButton"),
+  lineBurgerMenu = document.querySelectorAll(".lineBurgerMenu"),
+  firstHeader = document.querySelector(".first-header")
+
 
 document.addEventListener("DOMContentLoaded", () => {
+  header.style.animation = "1.8s opacity"
+  header.style.opacity = "1"
   services.style.opacity = "0"
   aboutus.style.opacity = "0"
   latestworksid.style.opacity = "0"
@@ -65,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
   footerContent.style.opacity = "0"
   footer.style.opacity = "0"
   getStartedButton.classList.toggle("disabledButton")
+  if(localStorage.idPost){
+    readMore(localStorage.idPost)
+  }
   if (localStorage.buttonNumber) {
     if (localStorage.buttonNumber === "firstButt") {
       setActiveCategory = null
@@ -252,7 +257,6 @@ function changeCite(number) {
   //       number = "third"
   //       break
   //   } 
-  console.log(number)
   let currentCiteText = currentCite
   switch (currentCiteText) {
     case 1:
@@ -270,6 +274,7 @@ function changeCite(number) {
   let numberCite = number + "Cite",
     numberCircle = number + "Circle",
     numberCiteVar = document.getElementById(numberCite),
+    numberCiteAuthorVar = document.getElementById(numberCite + "Author"),
     numberCircleVar = document.getElementById(numberCircle),
     previousNumber = document.getElementById(currentCiteText)
 
@@ -285,7 +290,11 @@ function changeCite(number) {
     document.querySelectorAll('.circleBlock').forEach(element => {
       element.classList.remove('active')
     })
+    document.getElementById("firstCiteAuthor").classList.remove('activeCite')
+    document.getElementById("secondCiteAuthor").classList.remove('activeCite')
+    document.getElementById("thirdCiteAuthor").classList.remove('activeCite')
     numberCiteVar.classList.add('activeCite')
+    numberCiteAuthorVar.classList.add('activeCite')
     numberCircleVar.classList.add('active')
     currentCite = number
     switch (currentCite) {
@@ -353,25 +362,25 @@ let tripleClickInterval = setInterval(() => {
   }, 500),
   citesInterval = startCitesInterval()
 
-if (window.innerWidth > 560) {
-  parallaxInterval = setInterval(() => {
-    header.style.backgroundPosition = `0 ${window.scrollY / 3}rem`
-    if (window.innerWidth >= 2560) {
-      propaboutwork.style.backgroundPosition = `0 -${(window.scrollY - 5500) / 3}rem`
-    } else {
-      propaboutwork.style.backgroundPosition = `0 ${(window.scrollY - 4600) / 3}rem`
-    }
-    if (topLine && scrollX < 49) {
-      topLine.class = 'top-line toplineFixed'
-    }
-    if (window.innerWidth < 840 && scrollY > 49) {
-      logo.classList.add("hidden")
-      topLine.style.justifyContent = "center"
-    } else {
-      logo.classList.remove("hidden")
-    }
-  }, 1)
-}
+parallaxInterval = setInterval(() => {
+  header.style.backgroundPosition = `0 ${window.scrollY / 3}rem`
+  if (window.innerWidth >= 2560) {
+    propaboutwork.style.backgroundPosition = `0 -${(window.scrollY - 5500) / 3}rem`
+  } else {
+    propaboutwork.style.backgroundPosition = `0 ${(window.scrollY - 4600) / 3}rem`
+  }
+  if (scrollX < 49) {
+    topLine.class = 'top-line toplineFixed'
+  }
+  if (window.innerWidth < 840 && window.innerWidth > 559 && scrollY > 49) {
+    logo.classList.add("hidden")
+    topLine.style.justifyContent = "center"
+  } else {
+    logo.classList.remove("hidden")
+    burgerMenuButton.style.width = "60rem"
+    burgerMenuButton.style.height = "60rem"
+  }
+}, 1)
 
 let disabledButton = setInterval(() => {
   getStartedButton.classList.toggle("disabledButton")
@@ -380,31 +389,42 @@ let disabledButton = setInterval(() => {
 
 document.addEventListener("scroll", () => {
   let currentScrollY = window.scrollY
-  if (window.innerWidth >= 560) {
 
-    if (currentScrollY > lastScrollY) {
-      topLine.removeAttribute("style")
-      centerContent.removeAttribute("style")
-    } else {
-      if (currentScrollY > 700) {
-        topLine.style.position = "fixed"
-        centerContent.style.margin = "70rem 0 429rem 0"
+  if (currentScrollY > lastScrollY) {
+    topLine.removeAttribute("style")
+    centerContent.removeAttribute("style")
+  } else {
+    if (currentScrollY > 700) {
+      topLine.style.position = "fixed"
+      centerContent.style.margin = "70rem 0 429rem 0"
+      topLine.style.padding = "20rem 0"
+      topLine.style.left = "0"
+      topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
+      topLine.style.top = "-40rem"
+      topLine.style.transition = "all 1s ease"
+      topLine.style.animation = "40s backgroundTopLine infinite"
+      if (window.innerWidth < 560) {
+        topLine.style.flexDirection = "row"
+        if (window.innerWidth > 410) {
+          topLine.style.width = "80%"
+          topLine.style.padding = "20rem 55rem"
+        } else {
+          topLine.style.width = "65%"
+          topLine.style.padding = "20rem 75rem"
+        }
+        logo.querySelector("a").style.fontSize = "16rem"
+      } else {
         topLine.style.width = "100%"
         topLine.style.padding = "20rem 0"
-        topLine.style.left = "0"
-        topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
-        topLine.style.top = "-40rem"
-        topLine.style.transition = "all 1s ease"
-        topLine.style.animation = "40s backgroundTopLine infinite"
         topLine.style.justifyContent = "space-around"
-      } else {
-        topLine.removeAttribute("style")
-        centerContent.removeAttribute("style")
       }
+    } else {
+      topLine.removeAttribute("style")
+      centerContent.removeAttribute("style")
     }
-
-    lastScrollY = currentScrollY
   }
+
+  lastScrollY = currentScrollY
   if (currentScrollY > 268) {
     services.style.opacity = "1"
     services.style.animation = "1s opacity"
@@ -447,15 +467,19 @@ function send() {
     companyName = document.getElementById("companyName").value,
     message = document.getElementById("message").value,
     emailCheck = emailRexExp.test(email)
-  if (emailCheck) {
-    let userDataConfirmed = confirm('Чи правильно ви все вказали?')
-    localStorage.setItem("username", username)
-    localStorage.setItem("email", email)
-    localStorage.setItem("subject", subject)
-    localStorage.setItem("companyName", companyName)
-    localStorage.setItem("message", message)
-  } else if (!emailCheck) {
-    alert("You write uncorrect email")
+  if (email === "" || username === "" || subject === "" || companyName === "" || message === "") {
+    alert("Ви ввели не все!")
+  } else {
+    if (emailCheck) {
+      let userDataConfirmed = confirm('Чи правильно ви все вказали?')
+      localStorage.setItem("username", username)
+      localStorage.setItem("email", email)
+      localStorage.setItem("subject", subject)
+      localStorage.setItem("companyName", companyName)
+      localStorage.setItem("message", message)
+    } else if (!emailCheck) {
+      alert("You write uncorrect email")
+    }
   }
 }
 
@@ -464,17 +488,22 @@ function readMore(id) {
     newElement = document.createElement("p"),
     paragraphs = buttonId.querySelectorAll("p"),
     readMoreNewButton = document.createElement("a")
+  localStorage.setItem("idPost", id)
 
   readMoreVar = buttonId.querySelector("#readMore")
   postp = buttonId.querySelector("#" + id + "p")
-
-  readMoreVar.classList.toggle("hidden")
-  buttonId.appendChild(newElement)
+  if (window.innerWidth >= 880) {
+    postp.innerHTML = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidulabore et dolore aliquyam erat, sed diam. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  ab ratione"
+    buttonId.appendChild(newElement)
+    newElement.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus porro quaerat impedit voluptatum minus provident voluptatibus soluta? Doloremque, voluptatum. Molestias error blanditiis reprehenderit, magni recusandae rem alias impedit corrupti? Quis officia obcaecati quia esse alias aliquid consequatur reiciendis molestias sint error, harum et amet quisquam blanditiis, illum dolor beatae quam temporibus veniam voluptatum assumenda ipsa. Soluta officiis nam fuga ipsa quae deserunt odio culpa ullam tempore saepe autem explicabo cumque at nostrum perferendis rerum, pariatur animi necessitatibus. Excepturi deleniti quis magnam exercitationem non voluptatum, dolor obcaecati enim, possimus asperiores ratione deserunt quos nesciunt qui perferendis natus maiores temporibus ipsa reiciendis fugit, ad ut omnis repudiandae. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione qui ex eaque, a, cumque deleniti sed quia aut! Earum accusamus eum modi animi dolor praesentium molestiae quisquam, quod sapiente aliquam quas libero vitae in corrupti labore illo magnam. Iste odio eveniet amet quasi voluptatibus incidunt eaque maxime minus, dolores laudantium corporis sapiente in voluptates veritatis odit at, quaerat voluptate, nisi porro natus perspiciatis! Hic tempora, illo quis, numquam quas neque pariatur quod magnam sed minus nisi quidem vitae id corporis odit, impedit saepe asperiores facere ab ut? Consectetur sunt sit fuga. Dolore, deleniti. Quidem non quae voluptatum culpa illum provident veritatis quaerat voluptate reprehenderit mollitia repudiandae dolores debitis ducimus sequi ea fuga, unde perspiciatis eligendi? Doloribus amet corporis magnam iste nisi! Veritatis et delectus earum expedita aut asperiores ratione eaque tempore vitae nulla necessitatibus inventore tenetur temporibus hic ipsa iste a quos molestiae quis laborum nam, corporis impedit laboriosam porro? Corrupti laudantium eius quam tempora quos iusto voluptate?"
+    newElement.style.margin = "0"
+    buttonId.appendChild(readMoreNewButton)
+  } else {
+    firstHeader.appendChild(readMoreNewButton)
+    postp.innerHTML = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidulabore et dolore aliquyam erat, sed diam. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  ab ratione. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus porro quaerat impedit voluptatum minus provident voluptatibus soluta? Doloremque, voluptatum. Molestias error blanditiis reprehenderit, magni recusandae rem alias impedit corrupti? Quis officia obcaecati quia esse alias aliquid consequatur reiciendis molestias sint error, harum et amet quisquam blanditiis, illum dolor beatae quam temporibus veniam voluptatum assumenda ipsa. Soluta officiis nam fuga ipsa quae deserunt odio culpa ullam tempore saepe autem explicabo cumque at nostrum perferendis rerum, pariatur animi necessitatibus. Excepturi deleniti quis magnam exercitationem non voluptatum, dolor obcaecati enim, possimus asperiores ratione deserunt quos nesciunt qui perferendis natus maiores temporibus ipsa reiciendis fugit, ad ut omnis repudiandae. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione qui ex eaque, a, cumque deleniti sed quia aut! Earum accusamus eum modi animi dolor praesentium molestiae quisquam, quod sapiente aliquam quas libero vitae in corrupti labore illo magnam. Iste odio eveniet amet quasi voluptatibus incidunt eaque maxime minus, dolores laudantium corporis sapiente in voluptates veritatis odit at, quaerat voluptate, nisi porro natus perspiciatis! Hic tempora, illo quis, numquam quas neque pariatur quod magnam sed minus nisi quidem vitae id corporis odit, impedit saepe asperiores facere ab ut? Consectetur sunt sit fuga. Dolore, deleniti. Quidem non quae voluptatum culpa illum provident veritatis quaerat voluptate reprehenderit mollitia repudiandae dolores debitis ducimus sequi ea fuga, unde perspiciatis eligendi? Doloribus amet corporis magnam iste nisi! Veritatis et delectus earum expedita aut asperiores ratione eaque tempore vitae nulla necessitatibus inventore tenetur temporibus hic ipsa iste a quos molestiae quis laborum nam, corporis impedit laboriosam porro? Corrupti laudantium eius quam tempora quos iusto voluptate?"
+  }
   newElement.id = "readMoreNewParagraph"
-  postp.innerHTML = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod teduntlabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et erebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidulabore et dolore aliquyam erat, sed diam. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  exercitationem ab ratione  ab ratione"
-  newElement.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus porro quaerat impedit voluptatum minus provident voluptatibus soluta? Doloremque, voluptatum. Molestias error blanditiis reprehenderit, magni recusandae rem alias impedit corrupti? Quis officia obcaecati quia esse alias aliquid consequatur reiciendis molestias sint error, harum et amet quisquam blanditiis, illum dolor beatae quam temporibus veniam voluptatum assumenda ipsa. Soluta officiis nam fuga ipsa quae deserunt odio culpa ullam tempore saepe autem explicabo cumque at nostrum perferendis rerum, pariatur animi necessitatibus. Excepturi deleniti quis magnam exercitationem non voluptatum, dolor obcaecati enim, possimus asperiores ratione deserunt quos nesciunt qui perferendis natus maiores temporibus ipsa reiciendis fugit, ad ut omnis repudiandae. Modi ratione aliquam amet molestias quam dolor omnis suscipit ducimus, quasi numquam corrupti repellendus rem sunt laudantium vel, veniam laboriosam nulla veritatis sequi fugiat reiciendis eum nisi impedit! Vero repudiandae hic architecto error eveniet numquam enim suscipit officiis at eum voluptates nemo doloribus, exercitationem ab ratione qui ex eaque, a, cumque deleniti sed quia aut! Earum accusamus eum modi animi dolor praesentium molestiae quisquam, quod sapiente aliquam quas libero vitae in corrupti labore illo magnam. Iste odio eveniet amet quasi voluptatibus incidunt eaque maxime minus, dolores laudantium corporis sapiente in voluptates veritatis odit at, quaerat voluptate, nisi porro natus perspiciatis! Hic tempora, illo quis, numquam quas neque pariatur quod magnam sed minus nisi quidem vitae id corporis odit, impedit saepe asperiores facere ab ut? Consectetur sunt sit fuga. Dolore, deleniti. Quidem non quae voluptatum culpa illum provident veritatis quaerat voluptate reprehenderit mollitia repudiandae dolores debitis ducimus sequi ea fuga, unde perspiciatis eligendi? Doloribus amet corporis magnam iste nisi! Veritatis et delectus earum expedita aut asperiores ratione eaque tempore vitae nulla necessitatibus inventore tenetur temporibus hic ipsa iste a quos molestiae quis laborum nam, corporis impedit laboriosam porro? Corrupti laudantium eius quam tempora quos iusto voluptate?"
-  newElement.style.margin = "0"
-  buttonId.appendChild(readMoreNewButton)
+  readMoreVar.classList.toggle("hidden")
   readMoreNewButton.id = "readMoreNewButton"
   readMoreNewButton.onclick = readLess
   readMoreNewButton.innerHTML = "Read less"
@@ -567,7 +596,6 @@ function openBurgerMenu() {
   }
 }
 
-
 function smoothScrollTo(targetPosition) {
   let targetElement = document.getElementById(targetPosition)
   targetPosition = targetElement.getBoundingClientRect().y + window.scrollY
@@ -576,10 +604,15 @@ function smoothScrollTo(targetPosition) {
     duration = 100,
     interval = 10,
     elapsed = 0
+
   let scrollInterval = setInterval(() => {
     elapsed += interval
     let progress = elapsed / duration,
-      scrollAmount = currentPosition + distance * Math.pow(progress, 2)
+      easingProgress = progress < 0.5 ?
+      2 * Math.pow(progress, 2) :
+      1 - Math.pow(-2 * progress + 2, 2) / 2
+
+    let scrollAmount = currentPosition + distance * easingProgress
 
     window.scrollTo(0, scrollAmount)
 
@@ -588,7 +621,8 @@ function smoothScrollTo(targetPosition) {
       window.scrollTo(0, targetPosition)
     }
   }, interval)
-  if(window.innerWidth < 560){
+
+  if (window.innerWidth < 560) {
     openBurgerMenu()
   }
 }

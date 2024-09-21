@@ -19,9 +19,6 @@ html(lang="uk")
           .logo#logo
             a(href="#")  Startup
           .burgerMenuButton(onclick="openBurgerMenu()")
-            .lineBurgerMenu#first
-            .lineBurgerMenu#second
-            .lineBurgerMenu#third
           ul.menu
             li#da
               a(href="javascript:void(0)" onclick="openBurgerMenu()")  <<< Back
@@ -142,7 +139,10 @@ html(lang="uk")
               p.first.activeCite#firstCite Hvaing placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum”.
               p.first#secondCite All paths will one day come to an end. There's no need to rush.
               p.first#thirdCite The landscape of mortality does not change for centuries, but human life is like autumn dew or a bubble on the water. Nothingness.
-            p#second John Doe, Google Inc.
+            p.second#firstCiteAuthor.activeCite John Doe, Google Inc.
+            p.second#secondCiteAuthor Kvadrat 
+            p.second#thirdCiteAuthor The Mega Kvadrat 
+
             .circles 
               .circleBlock.active#firstCircle(onclick="activeCite('first')")
               .circleBlock#secondCircle(onclick="activeCite('second')")
