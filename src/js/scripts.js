@@ -243,10 +243,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.userSelect = "text"
   })
 
-  function updateSlider() {
+function updateSlider() {
     offset = -12.7 * currentIndex
     slider.style.transform = `translateX(${offset}%)`
-  }
+    document.querySelector('#left').disabled = "true"
+    document.querySelector('#right').disabled = "true"
+
+    setTimeout(() => {
+      document.querySelector('#left').removeAttribute("disabled")
+      document.querySelector('#right').removeAttribute("disabled")
+    }, 600)
+}
 
   function leftSlide() {
     currentIndex--
