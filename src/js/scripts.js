@@ -193,26 +193,27 @@ document.addEventListener("DOMContentLoaded", () => {
       startX = e.touches[0].clientX
       isSwiping = true
     })
-
+  
     sliderFigureVar.addEventListener('touchmove', (e) => {
       if (isSwiping) {
         let currentX = e.touches[0].clientX,
           diffX = currentX - startX
-
+  
         if (diffX > 50) {
           isSwiping = false
-          document.querySelector('#left').click()
+          leftSlide()
         } else if (diffX < -50) {
           isSwiping = false
-          document.querySelector('#right').click()
+          rightSlide()
         }
       }
     })
-
+  
     sliderFigureVar.addEventListener('touchend', () => {
       isSwiping = false
     })
   })
+  
   popup.addEventListener('mousedown', (e) => {
     offsetX = e.clientX - popup.getBoundingClientRect().left
     offsetY = e.clientY - popup.getBoundingClientRect().top
@@ -246,25 +247,24 @@ document.addEventListener("DOMContentLoaded", () => {
     popup.style.cursor = "default"
     document.body.style.userSelect = "text"
   })
-
   function updateSlider() {
     offset = -12.7 * currentIndex
     slider.style.transform = `translateX(${offset}%)`
-    document.querySelector('#left').disabled = "true"
-    document.querySelector('#right').disabled = "true"
-
+    
+    document.querySelector('#left').disabled = true
+    document.querySelector('#right').disabled = true
+  
     setTimeout(() => {
-      document.querySelector('#left').removeAttribute("disabled")
-      document.querySelector('#right').removeAttribute("disabled")
+      document.querySelector('#left').disabled = false
+      document.querySelector('#right').disabled = false
     }, 600)
   }
-
   function leftSlide() {
     currentIndex--
     if (currentIndex < 0) {
       currentIndex = 4
       slider.style.transition = "none"
-      offset = -12.7 * currentIndex
+      let offset = -12.7 * currentIndex
       slider.style.transform = `translateX(${offset}%)`
       setTimeout(() => {
         slider.style.transition = "all 1s ease"
@@ -275,18 +275,16 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlider()
     }
   }
-
   function rightSlide() {
     currentIndex++
     if (currentIndex > 4) {
       currentIndex = 0
       slider.style.transition = "none"
-      offset = -12.7 * currentIndex
+      let offset = -12.7 * currentIndex
       slider.style.transform = `translateX(${offset}%)`
       setTimeout(() => {
         slider.style.transition = "all 1s ease"
         currentIndex = 1
-        offset = -12.7 * currentIndex
         updateSlider()
       }, 100)
     } else {
