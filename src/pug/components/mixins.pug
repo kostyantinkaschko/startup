@@ -6,7 +6,7 @@ mixin services(name, id)
         p #{figure[name].desc}
 
 mixin people(name)
-    figcaption
+    figcaption.sliderFigure
         img(src=people[name].src, alt=people[name].alt)
         h2 #{people[name].name}
         p #{people[name].header}

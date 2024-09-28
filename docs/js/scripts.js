@@ -21,6 +21,7 @@ let click = 0,
   numberCircleVar = 0,
   previousNumber = 0,
   disabledButton = 0,
+  sliderFigure = document.querySelectorAll(".sliderFigure"),
   tripleClickInterval = false,
   header = document.querySelector('header'),
   headerWrapper = header.querySelector(".wrapper"),
@@ -185,29 +186,30 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.message) {
     document.getElementById("message").value = localStorage.message
   }
-
-  slider.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX
-    isSwiping = true
-  })
-
-  slider.addEventListener('touchmove', (e) => {
-    if (isSwiping) {
-      currentX = e.touches[0].clientX,
-        diffX = currentX - startX
-
-      if (diffX > 50) {
-        isSwiping = false
-        document.querySelector('#left').leftSlide()
-      } else if (diffX < -50) {
-        isSwiping = false
-        document.querySelector('#right').rightSlide()
+  sliderFigures.forEach(sliderFigure => {
+    sliderFigure.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX
+      isSwiping = true
+    })
+  
+    sliderFigure.addEventListener('touchmove', (e) => {
+      if (isSwiping) {
+        const currentX = e.touches[0].clientX
+        const diffX = currentX - startX
+  
+        if (diffX > 50) {
+          isSwiping = false
+          document.querySelector('#left').leftSlide()
+        } else if (diffX < -50) {
+          isSwiping = false
+          document.querySelector('#right').rightSlide()
+        }
       }
-    }
-  })
-
-  slider.addEventListener('touchend', () => {
-    isSwiping = false
+    })
+  
+    sliderFigure.addEventListener('touchend', () => {
+      isSwiping = false
+    })
   })
   popup.addEventListener('mousedown', (e) => {
     offsetX = e.clientX - popup.getBoundingClientRect().left
