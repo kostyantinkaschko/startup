@@ -13,6 +13,7 @@ let click = 0,
   currentCite = 1,
   totalCites = 3,
   currentScrollY = window.scrollY,
+  isSwiping = false,
   nextCite = 2,
   numberCite = 0,
   numberCircle = 0,
@@ -20,8 +21,9 @@ let click = 0,
   numberCiteAuthorVar = 0,
   numberCircleVar = 0,
   previousNumber = 0,
+  startX = 0,
   disabledButton = 0,
-  sliderFigure = document.querySelectorAll(".sliderFigure"),
+  sliderFigureVar = document.querySelectorAll(".sliderFigure"),
   tripleClickInterval = false,
   header = document.querySelector('header'),
   headerWrapper = header.querySelector(".wrapper"),
@@ -186,17 +188,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.message) {
     document.getElementById("message").value = localStorage.message
   }
-  sliderFigures.forEach(sliderFigure => {
-    sliderFigure.addEventListener('touchstart', (e) => {
+  sliderFigureVar.forEach(sliderFigureVar => {
+    sliderFigureVar.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX
       isSwiping = true
     })
-  
-    sliderFigure.addEventListener('touchmove', (e) => {
+
+    sliderFigureVar.addEventListener('touchmove', (e) => {
       if (isSwiping) {
-        const currentX = e.touches[0].clientX
-        const diffX = currentX - startX
-  
+        let currentX = e.touches[0].clientX,
+          diffX = currentX - startX
+
         if (diffX > 50) {
           isSwiping = false
           document.querySelector('#left').leftSlide()
@@ -206,8 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
     })
-  
-    sliderFigure.addEventListener('touchend', () => {
+
+    sliderFigureVar.addEventListener('touchend', () => {
       isSwiping = false
     })
   })
@@ -245,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.userSelect = "text"
   })
 
-function updateSlider() {
+  function updateSlider() {
     offset = -12.7 * currentIndex
     slider.style.transform = `translateX(${offset}%)`
     document.querySelector('#left').disabled = "true"
@@ -255,7 +257,7 @@ function updateSlider() {
       document.querySelector('#left').removeAttribute("disabled")
       document.querySelector('#right').removeAttribute("disabled")
     }, 600)
-}
+  }
 
   function leftSlide() {
     currentIndex--
