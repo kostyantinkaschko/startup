@@ -188,30 +188,28 @@ document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.message) {
     document.getElementById("message").value = localStorage.message
   }
-  sliderFigureVar.forEach(sliderFigureVar => {
-    sliderFigureVar.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX
-      isSwiping = true
-    })
+  slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX
+    isSwiping = true
+  })
   
-    sliderFigureVar.addEventListener('touchmove', (e) => {
-      if (isSwiping) {
-        let currentX = e.touches[0].clientX,
-          diffX = currentX - startX
+  slider.addEventListener('touchmove', (e) => {
+    if (isSwiping) {
+      let currentX = e.touches[0].clientX
+      let diffX = currentX - startX
   
-        if (diffX > 50) {
-          isSwiping = false
-          leftSlide()
-        } else if (diffX < -50) {
-          isSwiping = false
-          rightSlide()
-        }
+      if (diffX > 50) {
+        isSwiping = false
+        leftSlide()
+      } else if (diffX < -50) {
+        isSwiping = false
+        rightSlide()
       }
-    })
+    }
+  })
   
-    sliderFigureVar.addEventListener('touchend', () => {
-      isSwiping = false
-    })
+  slider.addEventListener('touchend', () => {
+    isSwiping = false
   })
   
   popup.addEventListener('mousedown', (e) => {
