@@ -201,10 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (diffX > 50) {
           isSwiping = false
-          document.querySelector('#left').leftSlide()
+          document.querySelector('#left').click()
         } else if (diffX < -50) {
           isSwiping = false
-          document.querySelector('#right').rightSlide()
+          document.querySelector('#right').click()
         }
       }
     })
