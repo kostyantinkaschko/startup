@@ -198,10 +198,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (diffX > 50) {
         isSwiping = false
-        document.querySelector('#left').click()
+        document.querySelector('#left').leftSlide()
       } else if (diffX < -50) {
         isSwiping = false
-        document.querySelector('#right').click()
+        document.querySelector('#right').rightSlide()
       }
     }
   })
@@ -248,40 +248,47 @@ document.addEventListener("DOMContentLoaded", () => {
     slider.style.transform = `translateX(${offset}%)`
   }
 
+  function leftSlide() {
+    currentIndex--
+    if (currentIndex < 0) {
+      currentIndex = 4
+      slider.style.transition = "none"
+      offset = -12.7 * currentIndex
+      slider.style.transform = `translateX(${offset}%)`
+      setTimeout(() => {
+        slider.style.transition = "all 1s ease"
+        currentIndex = 3
+        updateSlider()
+      }, 100)
+    } else {
+      updateSlider()
+    }
+  }
+
+  function rightSlide() {
+    currentIndex++
+    if (currentIndex > 4) {
+      currentIndex = 0
+      slider.style.transition = "none"
+      offset = -12.7 * currentIndex
+      slider.style.transform = `translateX(${offset}%)`
+      setTimeout(() => {
+        slider.style.transition = "all 1s ease"
+        currentIndex = 1
+        offset = -12.7 * currentIndex
+        updateSlider()
+      }, 100)
+    } else {
+      updateSlider()
+    }
+  }
   if (!waitVarForAnimation) {
     document.querySelector('#left').addEventListener('click', () => {
-      currentIndex--
-      if (currentIndex < 0) {
-        currentIndex = 4
-        slider.style.transition = "none"
-        offset = -12.7 * currentIndex
-        slider.style.transform = `translateX(${offset}%)`
-        setTimeout(() => {
-          slider.style.transition = "all 1s ease"
-          currentIndex = 3
-          updateSlider()
-        }, 100)
-      } else {
-        updateSlider()
-      }
+      leftSlide()
     })
 
     document.querySelector('#right').addEventListener('click', () => {
-      currentIndex++
-      if (currentIndex > 4) {
-        currentIndex = 0
-        slider.style.transition = "none"
-        offset = -12.7 * currentIndex
-        slider.style.transform = `translateX(${offset}%)`
-        setTimeout(() => {
-          slider.style.transition = "all 1s ease"
-          currentIndex = 1
-          offset = -12.7 * currentIndex
-          updateSlider()
-        }, 100)
-      } else {
-        updateSlider()
-      }
+      rightSlide()
     })
   }
 
