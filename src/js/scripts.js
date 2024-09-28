@@ -75,6 +75,7 @@ let click = 0,
   isDragging = false,
   leftVar = 0,
   offset = 0,
+  sliderButtons = document.querySelector("#sliderButtons")
   basketArray = JSON.parse(localStorage.getItem('basket')) || [],
   viewButtons = document.querySelectorAll('.view-button'),
   basketPopup = document.querySelector('#basketPopup'),
@@ -209,6 +210,30 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   
   slider.addEventListener('touchend', () => {
+    isSwiping = false
+  })
+  
+  sliderButtons.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX
+    isSwiping = true
+  })
+  
+  sliderButtons.addEventListener('touchmove', (e) => {
+    if (isSwiping) {
+      let currentX = e.touches[0].clientX
+      let diffX = currentX - startX
+  
+      if (diffX > 50) {
+        isSwiping = false
+        leftSlide()
+      } else if (diffX < -50) {
+        isSwiping = false
+        rightSlide()
+      }
+    }
+  })
+  
+  sliderButtons.addEventListener('touchend', () => {
     isSwiping = false
   })
   
