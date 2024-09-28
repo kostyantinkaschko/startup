@@ -86,6 +86,7 @@ let click = 0,
   emailOrderCheck = false,
   dataForOrderPupUp = document.querySelector("#dataForOrderPupUp"),
   currentX = 0,
+  secondSlider = document.querySelector("#secondSlider")
   works = {
     first: {
       src: "img/filework.png",
@@ -212,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   slider.addEventListener('touchend', () => {
     isSwiping = false
   })
-  
+
   sliderButtons.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX
     isSwiping = true
