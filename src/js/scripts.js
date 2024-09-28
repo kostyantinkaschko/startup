@@ -1,32 +1,41 @@
 let click = 0,
   tripleClick = false,
-  codeId = document.getElementById("codeIdcircle"),
-  typographIdH2 = document.getElementById("typographIdH2"),
-  codeIdH2 = document.getElementById("codeIdH2"),
-  supportIdH2 = document.getElementById("supportIdH2"),
-  firstCite = document.getElementById("firstCite"),
-  secondCite = document.getElementById("secondCite"),
-  thirdCite = document.getElementById("thirdCite"),
-  firstCircle = document.getElementById("firstCircle"),
-  secondCircle = document.getElementById("secondCircle"),
-  thirdCitcle = document.getElementById("thirdCircle"),
+  codeId = document.querySelector("#codeIdcircle"),
+  typographIdH2 = document.querySelector("#typographIdH2"),
+  codeIdH2 = document.querySelector("#codeIdH2"),
+  supportIdH2 = document.querySelector("#supportIdH2"),
+  firstCite = document.querySelector("#firstCite"),
+  secondCite = document.querySelector("#secondCite"),
+  thirdCite = document.querySelector("#thirdCite"),
+  firstCircle = document.querySelector("#firstCircle"),
+  secondCircle = document.querySelector("#secondCircle"),
+  thirdCircle = document.querySelector("#thirdCircle"),
   currentCite = 1,
   totalCites = 3,
+  currentScrollY = window.scrollY,
   nextCite = 2,
+  numberCite = 0,
+  numberCircle = 0,
+  numberCiteVar = 0,
+  numberCiteAuthorVar = 0,
+  numberCircleVar = 0,
+  previousNumber = 0,
+  disabledButton = 0,
+  tripleClickInterval = false,
   header = document.querySelector('header'),
   headerWrapper = header.querySelector(".wrapper"),
-  topLine = document.getElementById('topline'),
+  topLine = document.querySelector('#topline'),
   propaboutwork = document.querySelector(".propaboutwork"),
   circleDOM = document.querySelectorAll(".circle"),
-  centerContent = document.getElementById("centerContent"),
-  services = document.getElementById("services"),
-  aboutus = document.getElementById("aboutus"),
-  latestworksid = document.getElementById("latestworksid"),
-  proaboutwork = document.getElementById("proaboutwork"),
-  recentsPosts = document.getElementById("recentsPosts"),
-  companiesBlock = document.getElementById("companiesBlock"),
-  footerContent = document.getElementById("footerContent"),
-  footer = document.getElementById("footer"),
+  centerContent = document.querySelector("#centerContent"),
+  services = document.querySelector("#services"),
+  aboutus = document.querySelector("#aboutus"),
+  latestworksid = document.querySelector("#latestworksid"),
+  proaboutwork = document.querySelector("#proaboutwork"),
+  recentsPosts = document.querySelector("#recentsPosts"),
+  companiesBlock = document.querySelector("#companiesBlock"),
+  footerContent = document.querySelector("#footerContent"),
+  footer = document.querySelector("#footer"),
   emailRexExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   scrollY1px = 0,
   fixedScrollY1px = 0,
@@ -35,25 +44,100 @@ let click = 0,
   postp = 0,
   activeButtonVar = 0,
   waitVarForAnimation = false,
-  popup = document.getElementById("popup"),
-  falshScrollBar = document.getElementById("falshScrollBarId"),
-  getStartedButton = document.getElementById("getStartedButton"),
+  popup = document.querySelector("#popup"),
+  falshScrollBar = document.querySelector("#falshScrollBarId"),
+  getStartedButton = document.querySelector("#getStartedButton"),
   popUpOpenRights = false,
   infinitySlider = false,
   slider = document.querySelector('.sliderBlock'),
   slides = document.querySelectorAll('#slider figcaption'),
   currentIndex = 0,
-  logo = document.getElementById("logo"),
-  bottomside = document.getElementById("bottomside"),
+  currentCiteText = currentCite,
+  logo = document.querySelector("#logo"),
+  bottomside = document.querySelector("#bottomside"),
   setActiveCategory = null,
-  idLogin = document.getElementById("login"),
-  passwordId = document.getElementById("password"),
+  idLogin = document.querySelector("#login"),
+  passwordId = document.querySelector("#password"),
   parallaxInterval = false,
   menu = document.querySelector(".menu"),
   burgerMenuButton = document.querySelector(".burgerMenuButton"),
   lineBurgerMenu = document.querySelectorAll(".lineBurgerMenu"),
-  firstHeader = document.querySelector(".first-header")
-
+  firstHeader = document.querySelector(".first-header"),
+  form = document.querySelector("#formTask"),
+  wasSend = false,
+  basket = document.querySelector("#basket"),
+  basketImg = document.querySelector("#basketImg"),
+  offsetX,
+  offsetY,
+  isDragging = false,
+  leftVar = 0,
+  offset = 0,
+  basketArray = JSON.parse(localStorage.getItem('basket')) || [],
+  viewButtons = document.querySelectorAll('.view-button'),
+  basketPopup = document.querySelector('#basketPopup'),
+  basketList = document.querySelector('#basketList'),
+  popupErorr = document.querySelector("#popupError"),
+  popupErrorH2 = document.querySelector("#errorh2"),
+  fixedButton = document.querySelector("#fixedButton"),
+  emailOrderCheck = false,
+  dataForOrderPupUp = document.querySelector("#dataForOrderPupUp"),
+  currentX = 0,
+  works = {
+    first: {
+      src: "img/filework.png",
+      alt: "#",
+      category: ["Branding"],
+      header: "Hair Dresser"
+    },
+    second: {
+      src: "img/file2.png",
+      alt: "#",
+      category: ["Branding"],
+      header: "There is no"
+    },
+    third: {
+      src: "img/file3.png",
+      alt: "#",
+      category: ["Development"],
+      header: "There is no"
+    },
+    four: {
+      src: "img/file4.png",
+      alt: "#",
+      category: ["Development"],
+      header: "There is no"
+    },
+    five: {
+      src: "img/file5.png",
+      alt: "#",
+      category: ["Strategy"],
+      header: "There is no"
+    },
+    six: {
+      src: "img/file6.png",
+      alt: "#",
+      category: ["Strategy"],
+      header: "There is no"
+    },
+    seven: {
+      src: "img/file7.png",
+      alt: "#",
+      category: ["Design", "Strategy"],
+      header: "There is no"
+    },
+    eight: {
+      src: "img/file8.png",
+      alt: "#",
+      category: ["Development"],
+      header: "There is no"
+    },
+    nine: {
+      src: "img/file9.png",
+      alt: "#",
+      category: ["Design"],
+      header: "There is no"
+    }
+  }
 
 document.addEventListener("DOMContentLoaded", () => {
   header.style.animation = "1.8s opacity"
@@ -67,9 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
   footerContent.style.opacity = "0"
   footer.style.opacity = "0"
   getStartedButton.classList.toggle("disabledButton")
-  if(localStorage.idPost){
+  if (localStorage.idPost) {
     readMore(localStorage.idPost)
   }
+  basketHeaderFunction()
+  console.log(JSON.stringify(basketArray))
   if (localStorage.buttonNumber) {
     if (localStorage.buttonNumber === "firstButt") {
       setActiveCategory = null
@@ -100,9 +186,29 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("message").value = localStorage.message
   }
 
-  const popup = document.getElementById('popup')
-  let offsetX, offsetY, isDragging = false
+  slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX
+    isSwiping = true
+  })
 
+  slider.addEventListener('touchmove', (e) => {
+    if (isSwiping) {
+      currentX = e.touches[0].clientX,
+        diffX = currentX - startX
+
+      if (diffX > 50) {
+        isSwiping = false
+        document.querySelector('#left').click()
+      } else if (diffX < -50) {
+        isSwiping = false
+        document.querySelector('#right').click()
+      }
+    }
+  })
+
+  slider.addEventListener('touchend', () => {
+    isSwiping = false
+  })
   popup.addEventListener('mousedown', (e) => {
     offsetX = e.clientX - popup.getBoundingClientRect().left
     offsetY = e.clientY - popup.getBoundingClientRect().top
@@ -113,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
-      let leftVar = `${e.clientX - offsetX + popup.clientHeight / 1.8}`,
+      leftVar = `${e.clientX - offsetX + popup.clientHeight / 1.8}`,
         topVar = `${e.clientY - offsetY + popup.clientWidth / 2.1}`
       if (leftVar > 132 && leftVar < window.innerWidth / 1.095) {
         popup.style.left = leftVar + "rem"
@@ -138,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   function updateSlider() {
-    let offset = -12.7 * currentIndex
+    offset = -12.7 * currentIndex
     slider.style.transform = `translateX(${offset}%)`
   }
 
@@ -180,47 +286,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // slider.addEventListener('touchstart', (e) => {
-  //   startX = e.touches[0].clientX
-  // })
-
-  // slider.addEventListener('touchend', (e) => {
-  //   let endX = e.changedTouches[0].clientX,
-  //     diffX = startX - endX
-
-  //   if (Math.abs(diffX) > 50) {
-  //     if (diffX > 0) {
-  //       currentIndex++
-  //       if (currentIndex >= totalSlides) {
-  //         currentIndex = 0
-  //         slider.style.transition = "none"
-  //         updateSlider()
-  //         setTimeout(() => {
-  //           slider.style.transition = "all 1s ease"
-  //           currentIndex = 1
-  //           updateSlider()
-  //         }, 100)
-  //       } else {
-  //         updateSlider()
-  //       }
-  //     } else {
-  //       currentIndex--
-  //       if (currentIndex < 0) {
-  //         currentIndex = totalSlides - 1
-  //         slider.style.transition = "none"
-  //         updateSlider()
-  //         setTimeout(() => {
-  //           slider.style.transition = "all 1s ease"
-  //           currentIndex = totalSlides - 2
-  //           updateSlider()
-  //         }, 100)
-  //       } else {
-  //         updateSlider()
-  //       }
-  //     }
-  //   }
-  // })
-
 })
 
 
@@ -257,7 +322,7 @@ function changeCite(number) {
   //       number = "third"
   //       break
   //   } 
-  let currentCiteText = currentCite
+  currentCiteText = currentCite
   switch (currentCiteText) {
     case 1:
       currentCiteText = "firstCite"
@@ -271,12 +336,12 @@ function changeCite(number) {
 
   }
 
-  let numberCite = number + "Cite",
-    numberCircle = number + "Circle",
-    numberCiteVar = document.getElementById(numberCite),
-    numberCiteAuthorVar = document.getElementById(numberCite + "Author"),
-    numberCircleVar = document.getElementById(numberCircle),
-    previousNumber = document.getElementById(currentCiteText)
+  numberCite = number + "Cite"
+  numberCircle = number + "Circle"
+  numberCiteVar = document.getElementById(numberCite)
+  numberCiteAuthorVar = document.getElementById(numberCite + "Author")
+  numberCircleVar = document.getElementById(numberCircle)
+  previousNumber = document.getElementById(currentCiteText)
 
   previousNumber.style.animation = 'opacity .5s reverse infinite'
   console.log(previousNumber)
@@ -355,7 +420,7 @@ codeId.addEventListener('click', event => {
   }
 })
 
-let tripleClickInterval = setInterval(() => {
+tripleClickInterval = setInterval(() => {
     click = 0
     tripleClick = false
     console.log("tripleClickInterval")
@@ -364,11 +429,8 @@ let tripleClickInterval = setInterval(() => {
 
 parallaxInterval = setInterval(() => {
   header.style.backgroundPosition = `0 ${window.scrollY / 3}rem`
-  if (window.innerWidth >= 2560) {
-    propaboutwork.style.backgroundPosition = `0 -${(window.scrollY - 5500) / 3}rem`
-  } else {
-    propaboutwork.style.backgroundPosition = `0 ${(window.scrollY - 4600) / 3}rem`
-  }
+  propaboutwork.style.backgroundPosition = `0 -${window.scrollY / 26 * 2}rem`
+
   if (scrollX < 49) {
     topLine.class = 'top-line toplineFixed'
   }
@@ -382,13 +444,13 @@ parallaxInterval = setInterval(() => {
   }
 }, 1)
 
-let disabledButton = setInterval(() => {
+disabledButton = setInterval(() => {
   getStartedButton.classList.toggle("disabledButton")
   popUpOpenRights = true
 }, 2000)
 
 document.addEventListener("scroll", () => {
-  let currentScrollY = window.scrollY
+  currentScrollY = window.scrollY
 
   if (currentScrollY > lastScrollY) {
     topLine.removeAttribute("style")
@@ -459,7 +521,6 @@ document.addEventListener("scroll", () => {
   }
 })
 
-
 function send() {
   let username = document.getElementById("name").value,
     email = document.getElementById("email").value,
@@ -467,18 +528,24 @@ function send() {
     companyName = document.getElementById("companyName").value,
     message = document.getElementById("message").value,
     emailCheck = emailRexExp.test(email)
+
   if (email === "" || username === "" || subject === "" || companyName === "" || message === "") {
-    alert("Ви ввели не все!")
+    showErrorPopup("Ви ввели не все!")
   } else {
     if (emailCheck) {
-      let userDataConfirmed = confirm('Чи правильно ви все вказали?')
-      localStorage.setItem("username", username)
-      localStorage.setItem("email", email)
-      localStorage.setItem("subject", subject)
-      localStorage.setItem("companyName", companyName)
-      localStorage.setItem("message", message)
-    } else if (!emailCheck) {
-      alert("You write uncorrect email")
+      showConfirmPopup((userDataConfirmed) => {
+        if (userDataConfirmed) {
+          wasSend = true
+          localStorage.setItem("username", username)
+          localStorage.setItem("email", email)
+          localStorage.setItem("subject", subject)
+          localStorage.setItem("companyName", companyName)
+          localStorage.setItem("message", message)
+          localStorage.setItem("wasSend", wasSend)
+        }
+      })
+    } else {
+      showErrorPopup("Неправильний email!")
     }
   }
 }
@@ -532,7 +599,6 @@ function activeButton(id, buttonNumber) {
       console.log(`Removed hidden from: ${element.outerHTML}`)
     })
   } else {
-    let found = false
     bottomsideFigures.forEach(element => {
       let figcaptions = element.querySelectorAll("figcaption")
 
@@ -585,6 +651,7 @@ function popUp() {
     document.body.classList.toggle("no-scroll")
     headerWrapper.classList.toggle("margin")
     centerContent.classList.toggle("margin2")
+    basketPopup.classList.add('hide')
   }
 }
 
@@ -597,23 +664,31 @@ function openBurgerMenu() {
 }
 
 function smoothScrollTo(targetPosition) {
+  basketPopup.classList.add('hide')
+  document.body.classList.remove("no-scroll")
+  getStartedButton.classList.add("disabledButton")
+  popup.classList.add("hide")
+  falshScrollBar.classList.add("hide")
+
   let targetElement = document.getElementById(targetPosition)
   targetPosition = targetElement.getBoundingClientRect().y + window.scrollY
   let currentPosition = window.pageYOffset,
     distance = targetPosition - currentPosition,
-    duration = 100,
-    interval = 10,
+    duration = 200,
+    interval = 15,
     elapsed = 0
 
   let scrollInterval = setInterval(() => {
     elapsed += interval
     let progress = elapsed / duration,
-      easingProgress = progress < 0.5 ?
-      2 * Math.pow(progress, 2) :
-      1 - Math.pow(-2 * progress + 2, 2) / 2
+      easingProgress
+    if (progress < 0.5) {
+      easingProgress = Math.pow(progress * 2, 3) / 2 // Збільшення швидкості до 50% прокрутки
+    } else {
+      easingProgress = 0.5 + (Math.pow((progress - 0.5) * 2, 3) / 2) // Зменшення швидкості для другої половини
+    }
 
     let scrollAmount = currentPosition + distance * easingProgress
-
     window.scrollTo(0, scrollAmount)
 
     if (elapsed >= duration) {
@@ -625,4 +700,142 @@ function smoothScrollTo(targetPosition) {
   if (window.innerWidth < 560) {
     openBurgerMenu()
   }
+}
+
+updateBasketPopup()
+
+viewButtons.forEach(button => {
+  button.addEventListener('click', function () {
+    let workName = this.getAttribute('data-name'),
+      work = works[workName]
+
+    basketArray.push(work)
+    alert(`${work.header} was added to the basket!`)
+    updateBasketPopup()
+    saveBasketToLocalStorage()
+  })
+})
+
+function updateBasketPopup() {
+  basketList.innerHTML = ''
+
+  if (basketArray.length > 0) {
+    fixedButton.classList.remove("hide")
+  } else {
+    fixedButton.classList.add("hide")
+  }
+
+  basketArray.forEach(item => {
+    let listItem = document.createElement('div')
+    listItem.classList.add('item')
+
+    listItem.innerHTML = `
+      <div class="leftside">
+        <img src="${item.src}" alt="${item.alt}">
+      </div>
+      <div class="rightside">
+        <h2>${item.header}</h2>
+        <p>${item.category}</p>
+        <a href="javascript:void(0)" data-name="${item.header}" class="remove-button">Remove</a>
+      </div>
+    `
+
+    basketList.appendChild(listItem)
+  })
+
+  removeBasketButton()
+}
+
+function removeBasketButton() {
+  document.querySelectorAll('.remove-button').forEach(button => {
+    button.removeEventListener('click', handleRemove)
+    button.addEventListener('click', handleRemove)
+    if (basketArray.length > 0) {
+      fixedButton.classList.remove("hide")
+    } else {
+      fixedButton.classList.add("hide")
+    }
+  })
+}
+
+function handleRemove(event) {
+  let workName = event.target.getAttribute('data-name')
+  console.log(`Removing item: ${workName}`)
+  removeFromBasket(workName, event.target)
+}
+
+function removeFromBasket(workName, removeButton) {
+  let index = basketArray.findIndex(item => item.header === workName)
+  if (index > -1) {
+    basketArray.splice(index, 1)
+    removeButton.closest('.item').remove()
+    saveBasketToLocalStorage()
+  } else {
+    console.log(`Item not found: ${workName}`)
+  }
+}
+
+function saveBasketToLocalStorage() {
+  localStorage.setItem('basket', JSON.stringify(basketArray))
+}
+
+function basketPopupFunc() {
+  basketPopup.classList.toggle('hide')
+  document.body.classList.toggle("no-scroll")
+  getStartedButton.classList.toggle("disabledButton")
+  popup.classList.add("hide")
+  falshScrollBar.classList.toggle("hide")
+  dataForOrderPupUp.classList.add("hide")
+}
+
+function showErrorPopup(message) {
+  let popupError = document.getElementById("popupError"),
+    errorh2 = document.getElementById("errorh2")
+
+  errorh2.innerHTML = message
+  popupError.classList.remove("hide")
+
+  setTimeout(() => {
+    popupError.classList.add("hide")
+  }, 3000)
+}
+
+function showConfirmPopup(callback) {
+  let confirmPopup = document.getElementById("confirmPopup")
+  confirmPopup.classList.remove("hide")
+
+  document.getElementById("confirmYes").onclick = () => {
+    confirmPopup.classList.add("hide")
+    callback(true)
+  }
+
+  document.getElementById("confirmNo").onclick = () => {
+    confirmPopup.classList.add("hide")
+    callback(false)
+  }
+}
+
+
+function saveLocalStorageOrder() {
+  let nameOrder = document.querySelector("#nameOrder").value,
+    companyNameOrder = document.querySelector("#companyNameOrder").value,
+    messageOrder = document.querySelector("#messageOrder").value,
+    emailOrder = document.querySelector("#emailOrder").value
+  emailOrderCheck = emailRexExp.test(email)
+  if (emailOrderCheck) {
+    localStorage.setItem("nameOrder", nameOrder)
+    localStorage.setItem("companyNameOrder", companyNameOrder)
+    localStorage.setItem("messageOrder", messageOrder)
+    localStorage.setItem("emailOrder", emailOrder)
+    basketHeaderFunction()
+  }
+}
+
+function dataForOrderPupUpOpen() {
+  dataForOrderPupUp.classList.toggle("hide")
+}
+
+function basketHeaderFunction() {
+  let headersArray = basketArray.map(item => item.header)
+  document.getElementById('basketItems').value = JSON.stringify(headersArray)
 }

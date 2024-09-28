@@ -13,11 +13,13 @@ html(lang="uk")
   body.custom-scrollbar
     .falshScrollBar.hide#falshScrollBarId
       .scrollBar
-    header#home 
+    header#home.firstPage
       .wrapper.header
         .topline#topline
           .logo#logo
             a(href="#")  Startup
+            a(href="javascript:void(0)" onclick="basketPopupFunc()")#basket
+              img(src="img/basket.svg" alt="basket")#basketImg
           .burgerMenuButton(onclick="openBurgerMenu()")
           ul.menu
             li#da
@@ -47,6 +49,25 @@ html(lang="uk")
           input(type="text" name="login" id="login" placeholder="Your login" required)
           input(type="password" name="password" id="password" placeholder="Your pass")
           a(href="#") Submit
+      #basketPopup.hide
+        .popup-content
+          h2 Ваш кошик:
+          button(onclick="basketPopupFunc()")#close +
+          #basketList
+          .fixedButton.hide#fixedButton
+            button(onclick="dataForOrderPupUpOpen()") Buy 
+      #dataForOrderPupUp.hide
+        h2 Введіть ваші данні:
+        form(action="php/index.php" method="post" onsubmit="saveLocalStorageOrder()")
+          h2 Ім'я, призвіще
+          h2 Назва компанії
+          input(type="text" id="nameOrder" name="nameOrder" required)
+          input(type="text" name="companyNameOrder" id="companyNameOrder" required)
+          h2 Email 
+          input(type="text" name="emailOrder" id="emailOrder" required)
+          textarea(name="messageOrder" id="messageOrder")  
+          input(type="hidden" name="basketItems" id="basketItems" value="")
+          input(type="submit")
 
       .scrollBarFix
 
@@ -147,7 +168,7 @@ html(lang="uk")
               .circleBlock.active#firstCircle(onclick="activeCite('first')")
               .circleBlock#secondCircle(onclick="activeCite('second')")
               .circleBlock#thirdCircle(onclick="activeCite('third')")
-            //- button(onclick="activeCite('back')") 
+            //- button(onclick="activeCite(F'back')") 
             //- button(onclick="activeCite('next')") 
       .footer-content.wrapper#footerContent
         .topside 
@@ -182,19 +203,27 @@ html(lang="uk")
 
 
           .form 
-            form(action="#" method="post")
+            form(action="#")
               .firstInputs 
-                input(type="text" name="text" id="name" placeholder="Your name" required)
-                input(type="text" name="text" id="email" placeholder="Your e-mail" required)
+                input(type="text" name="name" id="name" placeholder="Your name" required)
+                input(type="text" name="email" id="email" placeholder="Your e-mail" required)
               .secondInputs
-                input(type="text" name="text" id="subject" placeholder="Your Subject" required)
-                input(type="text" name="text" id="companyName" placeholder="Company name" required)
+                input(type="text" name="subject" id="subject" placeholder="Your Subject" required)
+                input(type="text" name="companyName" id="companyName" placeholder="Company name" required)
               textarea(name="message" id="message" placeholder="Write your message" required)
               .submit
-                a(value="Send message" onclick="send()") submit
+                a(onclick="send()" href="javascript:void()") Send message
                 p 
                   span * 
                   | We’ll contact you as as possible. We don’t reply on Monday.
+            #popupError.hide
+              h2#errorh2 Квадрати захоплять світ!
+            #confirmPopup.hide.popup 
+              h2 Ви впевнені що все правильно вказали?
+              .da
+                button#confirmYes da 
+                button#confirmNo ne
+
 
       .footer#footer 
         .wrapper 

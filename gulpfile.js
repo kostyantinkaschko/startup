@@ -21,8 +21,7 @@ export const browserSyncFunc = () => {
         },
         open: true,
         browser: "chrome",
-        host: '192.168.0.105', // Додає доступність з локальної мережі
-        port: 7777 // Встановлює порт (можете залишити його коментованим, якщо ви не хочете його використовувати)
+        host: 'startup.sellprod', 
     })
 }
 
@@ -100,6 +99,17 @@ export const fonts = () => {
     }))
 }
 
+export const php = () => {
+    return gulp
+    .src([
+        "src/php/**/*.php"
+    ], {dot: true})
+    .pipe(gulp.dest("docs/php"))
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+}
+
 
 export const json = () => {
     return gulp
@@ -138,6 +148,7 @@ export const watch = () => {
     gulp.watch("src/pug/**/*.pug", gulp.parallel(html))
     gulp.watch("src/*.*", gulp.parallel(files))
     gulp.watch("src/fonts/**/*.*", gulp.parallel(fonts))
+    gulp.watch("src/php/**/*.*", gulp.parallel(php))
     gulp.watch("src/json/**/*.*", gulp.parallel(json))
     gulp.watch("src/img/*.*", gulp.parallel(images))
 }
@@ -153,6 +164,7 @@ export default gulp.series(
         fonts,
         images,
         browserSyncFunc,
-        json
+        json,
+        php
     )
 )
