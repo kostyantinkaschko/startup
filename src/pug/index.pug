@@ -49,25 +49,29 @@ html(lang="uk")
           input(type="text" name="login" id="login" placeholder="Your login" required)
           input(type="password" name="password" id="password" placeholder="Your pass")
           a(href="#") Submit
-      #basketPopup.hide
-        .popup-content
-          h2 Ваш кошик:
-          button(onclick="basketPopupFunc()")#close +
-          #basketList
-          .fixedButton.hide#fixedButton
-            button(onclick="dataForOrderPupUpOpen()") Buy 
-      #dataForOrderPupUp.hide
-        h2 Введіть ваші данні:
-        form(action="php/index.php" method="post" onsubmit="saveLocalStorageOrder()")
-          h2 Ім'я, призвіще
-          h2 Назва компанії
-          input(type="text" id="nameOrder" name="nameOrder" required)
-          input(type="text" name="companyNameOrder" id="companyNameOrder" required)
-          h2 Email 
-          input(type="text" name="emailOrder" id="emailOrder" required)
-          textarea(name="messageOrder" id="messageOrder")  
-          input(type="hidden" name="basketItems" id="basketItems" value="")
-          input(type="submit")
+      #basketFunctional
+        #basketPopup.hide
+          .popup-content
+            h2 Ваш кошик:
+            button(onclick="basketPopupFunc()")#close +
+            #basketList
+            .fixedButton.hide#fixedButton
+              button(onclick="dataForOrderPupUpOpen()") Buy 
+        #dataForOrderPupUp.hide
+          h2 Введіть ваші данні:
+          form(action="php/index.php" method="post" onsubmit="saveLocalStorageOrder()")
+            h2 Ім'я, призвіще
+            h2 Назва компанії
+            input(type="text" id="nameOrder" name="nameOrder" required)
+            input(type="text" name="companyNameOrder" id="companyNameOrder" required)
+            h2 Email 
+            input(type="text" name="emailOrder" id="emailOrder" required)
+            h2 Ваш коментар (Необов'язково)
+            textarea(name="messageOrder" id="messageOrder")  
+            input(type="hidden" name="basketItems" id="basketItems" value="")
+            h2 
+            input(type="submit")
+          button(onclick="dataForOrderPupUpOpen()") Закрити popup
 
       .scrollBarFix
 
@@ -181,10 +185,10 @@ html(lang="uk")
             //- button(onclick="activeCite(F'back')") 
             //- button(onclick="activeCite('next')") 
       .footer-content.wrapper#footerContent
-        .topside 
+        .topside
           .get-in-touch 
             h2 Get in touch
-            .line 
+            .line
             p Lorem ipsum dolor sit amet, consetetur sadipscing elitr amet
         .bottomside
           .contacts 
@@ -196,7 +200,7 @@ html(lang="uk")
                 p NY 101200, United States of America
             .hotline 
               img(src="img/fa-mobile-phone.png" alt="#") 
-              .header
+              .header#topside
                 h2 Hotline (24x7)
                 .first 
                   a(href="tel:65 0052 300") +65 0052 300, 

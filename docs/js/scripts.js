@@ -76,7 +76,7 @@ let click = 0,
   leftVar = 0,
   offset = 0,
   sliderButtons = document.querySelector("#sliderButtons")
-  basketArray = JSON.parse(localStorage.getItem('basket')) || [],
+basketArray = JSON.parse(localStorage.getItem('basket')) || [],
   viewButtons = document.querySelectorAll('.view-button'),
   basketPopup = document.querySelector('#basketPopup'),
   basketList = document.querySelector('#basketList'),
@@ -87,62 +87,62 @@ let click = 0,
   dataForOrderPupUp = document.querySelector("#dataForOrderPupUp"),
   currentX = 0,
   secondSlider = document.querySelector("#secondSlider")
-  works = {
-    first: {
-      src: "img/filework.png",
-      alt: "#",
-      category: ["Branding"],
-      header: "Hair Dresser"
-    },
-    second: {
-      src: "img/file2.png",
-      alt: "#",
-      category: ["Branding"],
-      header: "There is no"
-    },
-    third: {
-      src: "img/file3.png",
-      alt: "#",
-      category: ["Development"],
-      header: "There is no"
-    },
-    four: {
-      src: "img/file4.png",
-      alt: "#",
-      category: ["Development"],
-      header: "There is no"
-    },
-    five: {
-      src: "img/file5.png",
-      alt: "#",
-      category: ["Strategy"],
-      header: "There is no"
-    },
-    six: {
-      src: "img/file6.png",
-      alt: "#",
-      category: ["Strategy"],
-      header: "There is no"
-    },
-    seven: {
-      src: "img/file7.png",
-      alt: "#",
-      category: ["Design", "Strategy"],
-      header: "There is no"
-    },
-    eight: {
-      src: "img/file8.png",
-      alt: "#",
-      category: ["Development"],
-      header: "There is no"
-    },
-    nine: {
-      src: "img/file9.png",
-      alt: "#",
-      category: ["Design"],
-      header: "There is no"
-    }
+works = {
+  first: {
+    src: "img/filework.png",
+    alt: "#",
+    category: ["Branding"],
+    header: "Hair Dresser"
+  },
+  second: {
+    src: "img/file2.png",
+    alt: "#",
+    category: ["Branding"],
+    header: "There is no"
+  },
+  third: {
+    src: "img/file3.png",
+    alt: "#",
+    category: ["Development"],
+    header: "There is no"
+  },
+  four: {
+    src: "img/file4.png",
+    alt: "#",
+    category: ["Development"],
+    header: "There is no"
+  },
+  five: {
+    src: "img/file5.png",
+    alt: "#",
+    category: ["Strategy"],
+    header: "There is no"
+  },
+  six: {
+    src: "img/file6.png",
+    alt: "#",
+    category: ["Strategy"],
+    header: "There is no"
+  },
+  seven: {
+    src: "img/file7.png",
+    alt: "#",
+    category: ["Design", "Strategy"],
+    header: "There is no"
+  },
+  eight: {
+    src: "img/file8.png",
+    alt: "#",
+    category: ["Development"],
+    header: "There is no"
+  },
+  nine: {
+    src: "img/file9.png",
+    alt: "#",
+    category: ["Design"],
+    header: "There is no"
   }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   header.style.animation = "1.8s opacity"
@@ -194,12 +194,12 @@ document.addEventListener("DOMContentLoaded", () => {
     startX = e.touches[0].clientX
     isSwiping = true
   })
-  
+
   slider.addEventListener('touchmove', (e) => {
     if (isSwiping) {
       let currentX = e.touches[0].clientX
       let diffX = currentX - startX
-  
+
       if (diffX > 50) {
         isSwiping = false
         leftSlide()
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   })
-  
+
   slider.addEventListener('touchend', () => {
     isSwiping = false
   })
@@ -218,12 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
     startX = e.touches[0].clientX
     isSwiping = true
   })
-  
+
   sliderButtons.addEventListener('touchmove', (e) => {
     if (isSwiping) {
       let currentX = e.touches[0].clientX
       let diffX = currentX - startX
-  
+
       if (diffX > 50) {
         isSwiping = false
         leftSlide()
@@ -233,11 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   })
-  
+
   sliderButtons.addEventListener('touchend', () => {
     isSwiping = false
   })
-  
+
   popup.addEventListener('mousedown', (e) => {
     offsetX = e.clientX - popup.getBoundingClientRect().left
     offsetY = e.clientY - popup.getBoundingClientRect().top
@@ -271,18 +271,20 @@ document.addEventListener("DOMContentLoaded", () => {
     popup.style.cursor = "default"
     document.body.style.userSelect = "text"
   })
+
   function updateSlider() {
     offset = -12.7 * currentIndex
     slider.style.transform = `translateX(${offset}%)`
-    
+
     document.querySelector('#left').disabled = true
     document.querySelector('#right').disabled = true
-  
+
     setTimeout(() => {
       document.querySelector('#left').disabled = false
       document.querySelector('#right').disabled = false
     }, 600)
   }
+
   function leftSlide() {
     currentIndex--
     if (currentIndex < 0) {
@@ -299,6 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlider()
     }
   }
+
   function rightSlide() {
     currentIndex++
     if (currentIndex > 4) {
@@ -474,14 +477,11 @@ parallaxInterval = setInterval(() => {
   if (scrollX < 49) {
     topLine.class = 'top-line toplineFixed'
   }
-  if (window.innerWidth < 840 && window.innerWidth > 559 && scrollY > 49) {
-    logo.classList.add("hidden")
-    topLine.style.justifyContent = "center"
-  } else {
-    logo.classList.remove("hidden")
-    burgerMenuButton.style.width = "60rem"
-    burgerMenuButton.style.height = "60rem"
+
+  if (window.innerWidth < 845 & scrollX < 49) {
+    burgerMenuButton.classList.add("fixed")
   }
+
 }, 1)
 
 disabledButton = setInterval(() => {
@@ -493,36 +493,25 @@ document.addEventListener("scroll", () => {
   currentScrollY = window.scrollY
 
   if (currentScrollY > lastScrollY) {
-    topLine.removeAttribute("style")
-    centerContent.removeAttribute("style")
+    topLine.classList.remove("fixed-top-line", "small-screen", "medium-width", "large-screen")
+    centerContent.classList.remove("center-margin")
+    logo.querySelector("a").classList.remove("logo-small-font")
   } else {
     if (currentScrollY > 700) {
-      topLine.style.position = "fixed"
-      centerContent.style.margin = "70rem 0 429rem 0"
-      topLine.style.padding = "20rem 0"
-      topLine.style.left = "0"
-      topLine.style.backgroundColor = "rgba(0,0,0,0.5)"
-      topLine.style.top = "-40rem"
-      topLine.style.transition = "all 1s ease"
-      topLine.style.animation = "40s backgroundTopLine infinite"
-      if (window.innerWidth < 560) {
-        topLine.style.flexDirection = "row"
-        if (window.innerWidth > 410) {
-          topLine.style.width = "80%"
-          topLine.style.padding = "20rem 55rem"
-        } else {
-          topLine.style.width = "65%"
-          topLine.style.padding = "20rem 75rem"
-        }
-        logo.querySelector("a").style.fontSize = "16rem"
+      topLine.classList.add("fixed-top-line")
+      centerContent.classList.add("center-margin")
+
+      if (window.innerWidth < 845) {
+        topLine.classList.add("small-screen")
+        topLine.classList.add("medium-width")
+        logo.querySelector("a").classList.add("logo-small-font")
       } else {
-        topLine.style.width = "100%"
-        topLine.style.padding = "20rem 0"
-        topLine.style.justifyContent = "space-around"
+        topLine.classList.add("large-screen")
       }
     } else {
-      topLine.removeAttribute("style")
-      centerContent.removeAttribute("style")
+      topLine.classList.remove("fixed-top-line", "small-screen", "medium-width", "small-width", "large-screen")
+      centerContent.classList.remove("center-margin")
+      logo.querySelector("a").classList.remove("logo-small-font")
     }
   }
 
@@ -697,7 +686,7 @@ function popUp() {
 
 
 function openBurgerMenu() {
-  if (window.innerWidth < 560) {
+  if (window.innerWidth < 845) {
     document.body.classList.toggle("no-scroll")
     menu.classList.toggle("burgerMenu")
   }
@@ -737,7 +726,7 @@ function smoothScrollTo(targetPosition) {
     }
   }, interval)
 
-  if (window.innerWidth < 560) {
+  if (window.innerWidth < 845) {
     openBurgerMenu()
   }
 }
@@ -834,23 +823,28 @@ function showErrorPopup(message) {
 
   errorh2.innerHTML = message
   popupError.classList.remove("hide")
+  document.body.classList.add("no-scroll")
 
   setTimeout(() => {
     popupError.classList.add("hide")
+    document.body.classList.remove("no-scroll")
   }, 3000)
 }
 
 function showConfirmPopup(callback) {
   let confirmPopup = document.getElementById("confirmPopup")
   confirmPopup.classList.remove("hide")
-
+  confirmPopup.style.position = "fixed"
+  document.body.classList.add("no-scroll")
   document.getElementById("confirmYes").onclick = () => {
     confirmPopup.classList.add("hide")
+    document.body.classList.remove("no-scroll")
     callback(true)
   }
 
   document.getElementById("confirmNo").onclick = () => {
     confirmPopup.classList.add("hide")
+    document.body.classList.remove("no-scroll")
     callback(false)
   }
 }
